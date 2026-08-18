@@ -1,20 +1,366 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0a0f0d">
+<title>APKshala Pro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  body{margin:0;height:100vh;display:flex;flex-direction:column;
-    align-items:center;justify-content:center;
-    background:#0e3b2e;color:#fff;font-family:sans-serif;text-align:center}
-  h1{font-size:26px}
-  p{color:#9fd6c0}
-  .ok{font-size:50px}
+:root{--bg:#0a0f0d;--panel:#101713;--panel2:#0d1410;--line:#203127;--green:#3ddc84;--amber:#ffb454;--cyan:#5ad7e6;--red:#ff6b6b;--text:#e8f3ec;--muted:#8da497;--shadow:0 16px 50px #0008}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",sans-serif;min-height:100%;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;z-index:-3;opacity:.28;background-image:linear-gradient(#284133 1px,transparent 1px),linear-gradient(90deg,#284133 1px,transparent 1px);background-size:28px 28px;mask-image:linear-gradient(to bottom,#000,transparent 80%)}
+body:after{content:"";position:fixed;width:65vw;height:65vw;left:-20vw;top:-15vw;z-index:-2;background:#3ddc8412;border-radius:50%;filter:blur(70px);box-shadow:75vw 75vh 0 10vw #5ad7e60d}
+.orb{position:fixed;width:180px;height:180px;border-radius:50%;filter:blur(55px);opacity:.13;z-index:-1;pointer-events:none}.orb.a{background:var(--green);right:-60px;top:18vh}.orb.b{background:var(--cyan);left:-70px;bottom:8vh}
+button,input,textarea{font:inherit}button{color:inherit}.top{position:sticky;top:0;z-index:20;backdrop-filter:blur(16px);background:#0a0f0ddd;border-bottom:1px solid var(--line);padding:11px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.brand{display:flex;align-items:center;gap:9px}.logo{width:36px;height:36px;border:1px solid #3ddc8466;background:#0f2017;border-radius:11px;display:grid;place-items:center;color:var(--green);font:700 20px "Chakra Petch";box-shadow:0 0 25px #3ddc8418}.brand h1{font:700 18px "Chakra Petch";margin:0}.sub{font-size:10px;color:var(--muted);letter-spacing:.12em}
+.chip,.btn{border:1px solid var(--line);background:#111a14;border-radius:999px;padding:9px 12px;cursor:pointer;transition:.16s transform,.16s border-color,.16s background}.chip:active,.btn:active{transform:scale(.96)}.chip.green{border-color:#3ddc8450;color:var(--green)}
+main{max-width:1100px;margin:auto;padding:12px 12px 105px}.langbar{display:flex;gap:7px;overflow:auto;padding:4px 0 12px;scrollbar-width:none}.langbar::-webkit-scrollbar{display:none}.lang{white-space:nowrap;border-radius:10px;padding:8px 12px;border:1px solid var(--line);background:#0d1510;color:var(--muted);font-size:12px;font-weight:600}.lang.active{background:#143021;border-color:#3ddc8466;color:var(--green);box-shadow:0 0 18px #3ddc8410}
+.grid{display:grid;gap:12px}.card{background:linear-gradient(180deg,#111a15ee,#0d1410ee);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}.head{display:flex;justify-content:space-between;align-items:center;padding:11px 12px;border-bottom:1px solid var(--line);gap:8px}.title{font:600 14px "Chakra Petch";letter-spacing:.03em}.meta{font-size:11px;color:var(--muted)}.editor-wrap{display:grid;grid-template-columns:42px 1fr;min-height:360px;max-height:55vh}.gutter{padding:13px 8px 13px 0;text-align:right;color:#466154;font:12px/1.55 "JetBrains Mono";overflow:hidden;user-select:none;background:#0b110d}.editor{width:100%;height:100%;min-height:360px;resize:none;border:0;outline:0;background:#0b110d;color:#d9e8de;padding:13px 13px 20px 10px;font:12px/1.55 "JetBrains Mono";tab-size:2;white-space:pre;overflow:auto}
+.actions{display:flex;gap:7px;flex-wrap:wrap}.small{font-size:11px;padding:7px 9px;border-radius:9px}.accent{border-color:#3ddc844d;color:var(--green)}.amber{color:var(--amber);border-color:#ffb45444}.cyan{color:var(--cyan);border-color:#5ad7e644}
+.preview{padding:14px;min-height:390px;display:grid;place-items:center}.phone{width:min(330px,92vw);aspect-ratio:9/18.5;background:#030604;border:8px solid #1d2520;border-radius:34px;box-shadow:0 20px 70px #000b;position:relative;overflow:hidden}.punch{position:absolute;top:7px;left:50%;transform:translateX(-50%);width:65px;height:18px;border-radius:0 0 13px 13px;background:#050806;z-index:3}.status{height:28px;padding:7px 13px 0;font:10px "JetBrains Mono";display:flex;justify-content:space-between;position:absolute;top:0;left:0;right:0;z-index:2;background:#0005}.webframe{border:0;width:100%;height:100%;background:#fff;padding-top:0}.gesture{position:absolute;bottom:5px;left:50%;transform:translateX(-50%);width:95px;height:4px;border-radius:4px;background:#fff9;z-index:3}.terminal{padding:14px;font:12px/1.55 "JetBrains Mono";min-height:340px;max-height:55vh;overflow:auto;background:#070b08}.termline{margin-bottom:6px;white-space:pre-wrap;word-break:break-word}.cmd{color:var(--cyan)}.out{color:#cfe7d7}.err{color:#ff8a8a}.ok{color:var(--green)}
+.settings{padding:12px;display:grid;gap:10px}.field{display:grid;gap:6px}.field label{font-size:11px;color:var(--muted)}.field input{width:100%;background:#0a100c;border:1px solid var(--line);color:var(--text);border-radius:10px;padding:10px 11px;outline:none}.field input:focus{border-color:#3ddc8466}.swatches{display:flex;gap:8px}.sw{width:28px;height:28px;border-radius:50%;border:2px solid #fff3;cursor:pointer}.sw.active{outline:2px solid var(--text);outline-offset:2px}.note{font-size:11px;line-height:1.5;color:var(--muted);background:#0b130f;border:1px solid var(--line);padding:9px;border-radius:10px}.bottom{position:fixed;z-index:30;left:0;right:0;bottom:0;padding:10px max(10px,env(safe-area-inset-left)) calc(10px + env(safe-area-inset-bottom));background:#09100ddd;border-top:1px solid var(--line);backdrop-filter:blur(18px);display:grid;grid-template-columns:1fr 1fr;gap:9px}.big{min-height:52px;border-radius:15px;font:700 16px "Chakra Petch";border:1px solid #3ddc8455;background:#102318;box-shadow:0 8px 28px #0007}.big.apk{background:#2a1d0f;border-color:#ffb45455;color:var(--amber)}.big:disabled{opacity:.45}.toast{position:fixed;z-index:60;left:50%;bottom:84px;transform:translate(-50%,20px);opacity:0;pointer-events:none;max-width:90vw;background:#15221a;border:1px solid #3ddc8455;border-radius:12px;padding:10px 13px;box-shadow:var(--shadow);font-size:12px;transition:.2s}.toast.show{opacity:1;transform:translate(-50%,0)}.modal{position:fixed;inset:0;z-index:50;background:#000b;display:none;place-items:end center}.modal.show{display:grid}.sheet{width:min(680px,100%);max-height:90vh;overflow:auto;background:#101713;border:1px solid var(--line);border-radius:22px 22px 0 0;padding:15px;box-shadow:0 -20px 80px #000c}.sheet h2{font:700 20px "Chakra Petch";margin:0 0 8px}.close{float:right}.steps{display:grid;gap:8px;margin:12px 0}.step{display:grid;grid-template-columns:25px 1fr auto;align-items:center;gap:8px;padding:9px;border:1px solid var(--line);border-radius:10px;background:#0b120e}.dot{width:20px;height:20px
+;border-radius:50%;display:grid;place-items:center;background:#18231d;color:#718a7b;font-size:11px}.step.active .dot{border:2px solid var(--green);border-top-color:transparent;animation:spin .8s linear infinite}.step.done .dot{background:#164c2d;color:var(--green)}.step.error .dot{background:#4b1717;color:var(--red)}.bar{height:7px;background:#18221c;border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--green),var(--cyan));transition:width .25s}.success,.errorbox{padding:12px;border-radius:13px;margin-top:10px}.success{background:#0e281a;border:1px solid #3ddc8448}.errorbox{background:#2a1212;border:1px solid #ff6b6b55;color:#ffd1d1;font-size:12px;line-height:1.5}.hidden{display:none!important}@keyframes spin{to{transform:rotate(360deg)}}@media(min-width:760px){.grid{grid-template-columns:1.2fr .8fr}.card.editor-card{grid-row:span 2}.settings-card{grid-column:1/-1}.preview{min-height:55vh}.editor-wrap{height:55vh}.terminal{min-height:55vh;max-height:55vh}}
 </style>
 </head>
 <body>
-  <div class="ok">✅</div>
-  <h1>APKshala Test App</h1>
-  <p>Yeh app sahi kaam kar rahi hai!</p>
+<div class="orb a"></div><div class="orb b"></div>
+<header class="top"><div class="brand"><div class="logo">A</div><div><h1>APKshala Pro</h1><div class="sub">CODE • RUN • APK</div></div></div><button class="chip green" id="githubBtn">GitHub jodo</button></header>
+<main>
+  <div class="langbar" id="langs"></div>
+  <div class="grid">
+    <section class="card editor-card">
+      <div class="head"><div><div class="title">Code editor</div><div class="meta" id="langMeta">WEB</div></div><div class="actions"><button class="btn small cyan" id="sampleBtn">Sample</button><button class="btn small" id="clearBtn">Saaf</button></div></div>
+      <div class="editor-wrap"><div class="gutter" id="gutter"></div><textarea id="editor" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea></div>
+      <div class="head"><div class="meta" id="counter">0 line • 0 char</div><div class="meta" id="saveState">Auto-save on</div></div>
+    </section>
+    <section class="card output-card">
+      <div class="head"><div><div class="title">Output</div><div class="meta">Run ka result yahan dikhega</div></div><button class="btn small" id="clearOutput">Saaf</button></div>
+      <div id="output"></div>
+    </section>
+    <section class="card settings-card">
+      <div class="head"><div><div class="title">App settings</div><div class="meta">APK ke naam aur icon ki setting</div></div></div>
+      <div class="settings">
+        <div class="field"><label>App name</label><input id="appName" value="APKshala App" maxlength="28"></div>
+        <div class="field"><label>Version</label><input id="version" value="1.0.0" maxlength="12"></div>
+        <div class="field"><label>Icon ka letter</label><input id="iconLetter" value="A" maxlength="1"></div>
+        <div class="field"><label>Icon color</label><div class="swatches" id="swatches"></div></div>
+        <div class="note">Seedhi baat: browser khud APK compile/install nahi kar sakta. Real APK GitHub Actions cloud mein banegi. GitHub token sirf browser ke localStorage mein rahega.</div>
+      </div>
+    </section>
+  </div>
+</main>
+<div class="bottom"><button class="big" id="runBtn">▶ RUN</button><button class="big apk" id="apkBtn">⬇ APK BANAO</button></div>
+<div class="toast" id="toast"></div>
+
+<div class="modal" id="connectModal"><div class="sheet">
+  <button class="btn small close" data-close="connectModal">Band</button><h2>GitHub jodo</h2>
+  <p class="note">PAT token secret hai. Kisi ko mat bhejna. APKshala ise sirf GitHub API calls ke liye browser se use karega.</p>
+  <div class="field"><label>GitHub username</label><input id="ghUser" placeholder="jaise: rahul123" autocomplete="username"></div>
+  <div class="field" style="margin-top:9px"><label>PAT token</label><input id="ghToken" type="password" placeholder="ghp_... ya github_pat_..." autocomplete="off"></div>
+  <div class="actions" style="margin-top:10px"><button class="btn green" id="connectBtn">Connect check karo</button><button class="btn" id="guideBtn">PAT kaise banao?</button></div>
+  <div class="note" style="margin-top:10px">Classic PAT mein <b>repo + workflow</b> scopes chahiye. Fine-grained PAT use kar rahe ho to repo ke Contents/Workflows write permissions dena zaroori hai.</div>
+</div></div>
+
+<div class="modal" id="guideModal"><div class="sheet">
+  <button class="btn small close" data-close="guideModal">Band</button><h2>Mobile par PAT banao</h2>
+  <div class="note">
+    1. GitHub account mein login karo.<br>
+    2. Settings → Developer settings → Personal access tokens par jao.<br>
+    3. Classic token ke liye <b>repo</b> aur <b>workflow</b> tick karo.<br>
+    4. Token generate karke turant copy karo — baad mein GitHub full token dobara nahi dikhata.<br>
+    5. Token ko sirf apne trusted device/browser mein use karo.
+  </div>
+</div></div>
+
+<div class="modal" id="buildModal"><div class="sheet">
+  <button class="btn small close" data-close="buildModal" id="buildClose">Band</button><h2>APK build chal rahi hai</h2>
+  <div class="steps" id="steps"></div><div class="bar"><i id="progress"></i></div>
+  <div id="buildResult"></div>
+</div></div>
+
+<script>
+"use strict";
+/* APKshala Pro — single-file client app. No backend. */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const LANGS=["WEB","PYTHON","JAVA","JS","C","C++"];
+const KEY="apkshala.v1";
+const samples={
+WEB:`<!doctype html>
+<html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>
+body{font-family:system-ui;margin:0;padding:24px;background:#08130d;color:#eafff0}
+button{padding:12px 16px;border:0;border-radius:12px;background:#3ddc84}
+</style></head><body>
+<h1>Namaste 👋</h1><p>APKshala Pro mein WEB code chalao.</p>
+<button onclick="console.log('Button dabaya')">Test</button>
+<script>console.log("WEB ready");<\/script>
+</body></html>`,
+PYTHON:`print("Namaste from Python")
+for i in range(1, 4):
+    print("Count:", i)`,
+JAVA:`public class HelloApp {
+    public static void main(String[] args) {
+        System.out.println("Namaste from Java");
+        System.err.println("Demo error line");
+    }
+}`,
+JS:`console.log("Namaste from Node.js");
+console.log(2 + 3);`,
+C:`#include <stdio.h>
+int main(void){
+  printf("Namaste from C\n");
+  return 0;
+}`,
+"C++":`#include <iostream>
+int main(){
+  std::cout << "Namaste from C++\n";
+  return 0;
+}`
+};
+const state={lang:localStorage.getItem(KEY+".lang")||"WEB",codes:{},github:{user:"",token:""},accent:localStorage.getItem(KEY+".accent")||"#3ddc84",lastSha:localStorage.getItem(KEY+".lastSha")||""};
+LANGS.forEach(l=>state.codes[l]=localStorage.getItem(KEY+".code."+l)||samples[l]);
+state.github.user=localStorage.getItem(KEY+".ghUser")||"";
+state.github.token=localStorage.getItem(KEY+".ghToken")||"";
+$("#appName").value=localStorage.getItem(KEY+".appName")||"APKshala App";
+$("#version").value=localStorage.getItem(KEY+".version")||"1.0.0";
+$("#iconLetter").value=localStorage.getItem(KEY+".iconLetter")||"A";
+
+function toast(msg,ms=2600){const t=$("#toast");t.textContent=msg;t.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove("show"),ms)}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
+function renderLangs(){ $("#langs").innerHTML=LANGS.map(l=>`<button class="lang ${l===state.lang?"active":""}" data-lang="${l}">${l}</button>`).join("") }
+function updateGutter(){const n=$("#editor").value.split("\n").length;$("#gutter").textContent=Array.from({length:n},(_,i)=>i+1).join("\n");$("#counter").textContent=`${n} line • ${$("#editor").value.length} char`}
+function loadLang(){renderLangs();$("#editor").value=state.codes[state.lang];$("#langMeta").textContent=state.lang;updateGutter();renderOutput();localStorage.setItem(KEY+".lang",state.lang)}
+$("#langs").addEventListener("click",e=>{const b=e.target.closest("[data-lang]");if(!b)return;state.codes[state.lang]=$("#editor").value;state.lang=b.dataset.lang;loadLang()});
+$("#editor").addEventListener("input",()=>{state.codes[state.lang]=$("#editor").value;localStorage.setItem(KEY+".code."+state.lang,$("#editor").value);updateGutter();$("#saveState").textContent="Saved locally"});
+$("#editor").addEventListener("scroll",()=>{$("#gutter").scrollTop=$("#editor").scrollTop});
+$("#editor").addEventListener("keydown",e=>{if(e.key==="Tab"){e.preventDefault();const a=e.target.selectionStart,b=e.target.selectionEnd;e.target.setRangeText("  ",a,b,"end")}if((e.ctrlKey||e.metaKey)&&e.key==="Enter"){e.preventDefault();runCode()}});
+$("#sampleBtn").onclick=()=>{$("#editor").value=samples[state.lang];state.codes[state.lang]=samples[state.lang];localStorage.setItem(KEY+".code."+state.lang,$("#editor").value);updateGutter();toast("Sample code aa gaya")};
+$("#clearBtn").onclick=()=>{$("#editor").value="";state.codes[state.lang]="";localStorage.setItem(KEY+".code."+state.lang,"");updateGutter()};
+$("#clearOutput").onclick=()=>renderOutput();
+function renderOutput(){if(state.lang==="WEB"){$("#output").innerHTML=`<div class="preview"><div style="width:min(330px,92vw);display:grid;gap:9px"><div class="phone"><div class="punch"></div><div class="status"><span id="phoneTime">--:--</span><span>▮▮▮ ᯤ</span></div><iframe class="webframe" id="webframe" sandbox="allow-scripts allow-forms allow-modals"></iframe><div class="gesture"></div></div><div id="webConsole" class="terminal" style="min-height:90px;max-height:150px;border-radius:12px;border:1px solid var(--line)"><div class="termline out">WEB console ready.</div></div></div></div>`;writeWebFrame($("#editor").value)}else{$("#output").innerHTML=`<div class="terminal" id="terminal"><div class="termline cmd">$ ${esc(commandFor(state.lang))}</div><div class="termline out">Run dabao — result yahan dikhega.</div></div>`}}
+function commandFor(l){return ({PYTHON:"python main.py",JAVA:"java MainActivity",JS:"node main.js",C:"./main", "C++":"./main"})[l]||"webview index.html"}
+function writeWebFrame(src){const frame=$("#webframe");if(!frame)return;const bridge=`<script>(function(){function send(type,args){try{parent.postMessage({__apkshala:1,type:type,args:[...args].map(x=>{try{return typeof x==="string"?x:JSON.stringify(x)}catch(e){return String(x)}})}, "*")}catch(e){}}["log","warn","error"].forEach(k=>{const old=console[k];console[k]=function(){send(k,arguments);old.apply(console,arguments)}});window.addEventListener("error",e=>send("error",[e.message+" @ "+e.filename+":"+e.lineno]));window.addEventListener("unhandledrejection",e=>send("error",["Unhandled: "+e.reason]));})();<\/script>`;
+let out=src;
+if(/<head[\s>]/i.test(out))out=out.replace(/<head([^>]*)>/i,"<head$1>"+bridge);else out=bridge+out;
+frame.srcdoc=out;
+}
+window.addEventListener("message",e=>{if(e.data&&e.data.__apkshala&&state.lang==="WEB"){const c=$("#webConsole");if(c){const cls=e.data.type==="error"?"err":e.data.type==="warn"?"cmd":"out";const d=document.createElement("div");d.className="termline "+cls;d.textContent=(e.data.type||"log")+": "+e.data.args.join(" ");c.appendChild(d);c.scrollTop=c.scrollHeight}if(e.data.type==="error")toast("WEB error: "+e.data.args.join(" "));}});
+function clock(){const d=new Date(),s=d.toLocaleTimeString([], {hour:"2-digit",minute:"2-digit",hour12:false});const x=$("#phoneTime");if(x)x.textContent=s;setTimeout(clock,1000)}clock();
+
+async function pistonRun(lang,code){
+ const map={PYTHON:{language:"python",aliases:["py"],file:"main.py"},JS:{language:"javascript",aliases:["js"],file:"main.js"},C:{language:"c",aliases:["c"],file:"main.c"},"C++":{language:"c++",aliases:["cpp"],file:"main.cpp"},JAVA:{language:"java",aliases:["java"],file:"Main.java"}};
+ const m=map[lang];let runtime=null;
+ try{const r=await fetch("https://emkc.org/api/v2/piston/runtimes");if(r.ok){const rs=await r.json();runtime=rs.find(x=>x.language===m.language)||rs.find(x=>(x.aliases||[]).includes(m.aliases[0]));}}
+ catch(e){}
+ if(!runtime)throw new Error("Piston runtime nahi mila");
+ const body={language:runtime.language,version:runtime.version,files:[{name:m.file,content:code}]};
+ const r=await fetch("https://emkc.org/api/v2/piston/execute",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
+ if(!r.ok)throw new Error("Piston API "+r.status);
+ return await r.json();
+}
+async function jsIframeRun(code){
+ const f=document.createElement("iframe");f.style.display="none";document.body.appendChild(f);
+ return new Promise((resolve,reject)=>{
+  const id="js_"+Date.now();let done=false,logs=[],errs=[];
+  const finish=(x)=>{if(done)return;done=true;f.remove();resolve(x)};
+  const timer=setTimeout(()=>finish({stdout:logs.join("\n"),stderr:errs.join("\n"),code:0}),1800);
+  const handler=e=>{if(e.data?.id!==id)return;clearTimeout(timer);window.removeEventListener("message",handler);finish(e.data)};
+  window.addEventListener("message",handler);
+  f.srcdoc=`<script>(function(){let o=[],e=[];function s(t,a){parent.postMessage({id:${JSON.stringify(id)},type:t,args:a.map(String)},"*")}["log","info","warn"].forEach(k=>console[k]=(...a)=>s(k,a));console.error=(...a)=>s("error",a);window.onerror=(m)=>s("error",[m]);try{${code}\n}catch(x){s("error",[x.stack||x]);}})();<\/script>`;
+ });
+}
+async function pyodideRun(code){
+ const f=document.createElement("iframe");f.style.display="none";document.body.appendChild(f);
+ return new Promise((resolve,reject)=>{
+  const id="py_"+Date.now();let done=false;
+  const finish=(x,err)=>{if(done)return;done=true;f.remove();err?reject(err):resolve(x)};
+  window.addEventListener("message",function h(e){if(e.data?.id!==id)return;window.removeEventListener("message",h);finish(e.data)});
+  f.srcdoc=`<script src="https://cdn.jsdelivr.net/pyodide/v0.27.2/full/pyodide.js"><\\/script><script>
+  (async()=>{try{let p=await loadPyodide();let o=[],old=console.log;console.log=(...a)=>o.push(a.join(" "));let code=${JSON.stringify(code)};let v=await p.runPythonAsync(code);if(v!==undefined)o.push(String(v));parent.postMessage({id:${JSON.stringify(id)},ok:true,stdout:o.join("\n"),stderr:"",code:0},"*")}catch(e){parent.postMessage({id:${JSON.stringify(id)},ok:false,stdout:"",stderr:String(e),code:1},"*")}})();<\\/script>`;
+ });
+}
+function showTerminal(res){const t=$("#terminal");if(!t)return;t.innerHTML=`<div class="termline cmd">$ ${esc(commandFor(state.lang))}</div><div class="termline out">${esc(res.stdout||"")}</div><div class="termline err">${esc(res.stderr||"")}</div><div class="termline ${res.code===0?"ok":"err"}">exit status: ${esc(res.code??1)}</div>`}
+async function runCode(){
+ if(state.lang==="WEB"){renderOutput();toast("WEB preview refresh ho gaya");return}
+ const code=$("#editor").value;renderOutput();$("#terminal").innerHTML=`<div class="termline cmd">$ ${esc(commandFor(state.lang))}</div><div class="termline out">Run ho raha hai…</div>`;
+ try{
+  let r;
+  if(state.lang==="PYTHON"){try{r=await pistonRun(state.lang,code)}catch(e){r=await pyodideRun(code)}}
+  else if(state.lang==="JS"){try{r=await pistonRun("JS",code)}catch(e){r=await jsIframeRun(code)}}
+  else r=await pistonRun(state.lang,code);
+  const x=r.run||r;showTerminal({stdout:x.output||x.stdout||"",stderr:x.stderr||"",code:x.code??(r.run?.code??0)});
+ }catch(e){showTerminal({stdout:"",stderr:e.message,code:1});toast("Run fail hua")}
+}
+$("#runBtn").onclick=runCode;
+
+function sanitizeToken(v){return String(v||"").replace(/[^\x20-\x7E]/g,"").trim()}
+function tokenLooks(v){return /^ghp_[A-Za-z0-9_]+$/.test(v)||/^github_pat_[A-Za-z0-9_]+$/.test(v)}
+function ghHeaders(token){return {"Accept":"application/vnd.github+json","Authorization":"Bearer "+token,"X-GitHub-Api-Version":"2026-03-10","Content-Type":"application/json"}}
+async function ghFetch(url,opt={},retry=true){
+ try{return await fetch(url,{...opt,headers:{...ghHeaders(state.github.token),...(opt.headers||{})}})}
+ catch(e){if(retry&&e instanceof TypeError){return new Promise(res=>setTimeout(()=>res(ghFetch(url,opt,false)),650))}throw e}
+}
+$("#githubBtn").onclick=()=>{$("#ghUser").value=state.github.user;$("#ghToken").value=state.github.token;openModal("connectModal")};
+$("#guideBtn").onclick=()=>openModal("guideModal");
+$("#connectBtn").onclick=connectGithub;
+async function connectGithub(){
+ let user=$("#ghUser").value.trim(),token=sanitizeToken($("#ghToken").value);
+ if(!user||!tokenLooks(token)){toast("Username aur valid PAT do");return}
+ state.github={user,token};
+ try{
+  const r=await ghFetch("https://api.github.com/user");
+  if(!r.ok)throw new Error("GitHub ne token reject kiya ("+r.status+")");
+  const me=await r.json();const scopes=(r.headers.get("X-OAuth-Scopes")||"").split(",").map(x=>x.trim());
+  if(scopes.length && (!scopes.includes("repo")||!scopes.includes("workflow"))){throw new Error("Classic PAT mein repo + workflow dono scope chahiye. Naya token banao.")}
+  if(!scopes.length)toast("Token check hua; fine-grained PAT ho sakta hai",3500);
+  state.github.user=me.login;state.github.token=token;localStorage.setItem(KEY+".ghUser",me.login);localStorage.setItem(KEY+".ghToken",token);
+  closeModal("connectModal");$("#githubBtn").textContent="✓ GitHub joda";toast("GitHub connect ho gaya");
+ }catch(e){state.github.token="";$("#ghToken").value="";toast(e.message,5000)}
+}
+function openModal(id){$("#"+id).classList.add("show")}function closeModal(id){$("#"+id).classList.remove("show")}
+$$("[data-close]").forEach(b=>b.onclick=()=>closeModal(b.dataset.close));
+
+const colors=["#3ddc84","#5ad7e6","#ffb454","#ff6b6b","#b28cff","#f472b6"];
+$("#swatches").innerHTML=colors.map(c=>`<button class="sw ${c===state.accent?"active":""}" style="background:${c}" data-color="${c}" aria-label="${c}"></button>`).join("");
+$("#swatches").onclick=e=>{const b=e.target.closest("[data-color]");if(!b)return;state.accent=b.dataset.color;localStorage.setItem(KEY+".accent",state.accent);$$(".sw").forEach(x=>x.classList.toggle("active",x===b))};
+["appName","version","iconLetter"].forEach(id=>$("#"+id).addEventListener("input",()=>localStorage.setItem(KEY+"."+id,$("#"+id).value)));
+
+function b64(s){const bytes=new TextEncoder().encode(s);let bin="";const step=0x8000;for(let i=0;i<bytes.length;i+=step)bin+=String.fromCharCode(...bytes.subarray(i,i+step));return btoa(bin)}
+function slug(s){let x=s.toLowerCase().replace(/[^a-z0-9]+/g,".").replace(/^\.+|\.+$/g,"");if(!/^[a-z]/.test(x))x="app."+x;return x.slice(0,50)}
+function safeVersionCode(v){const m=String(v).match(/\d+/g)||[1];return Math.max(1,Math.min(999999,parseInt(m.join("").slice(0,6),10)||1))}
+function appCfg(){const name=$("#appName").value.trim()||"APKshala App";return {name,version:$("#version").value.trim()||"1.0.0",pkg:"com.apkshala."+slug(name).replace(/\./g,""),letter:(($("#iconLetter").value||name[0]||"A").trim()[0]||"A").toUpperCase(),color:state.accent,vc:safeVersionCode($("#version").value)}}
+function iconPng(cfg){
+ const c=document.createElement("canvas");c.width=c.height=192;const x=c.getContext("2d");x.fillStyle=cfg.color;x.fillRect(0,0,192,192);x.fillStyle="#08110c";x.font="bold 105px sans-serif";x.textAlign="center";x.textBaseline="middle";x.fillText(cfg.letter,96,101);return c.toDataURL("image/png").split(",")[1]
+}
+function javaClassName(code){const m=code.match(/\b(?:public\s+)?class\s+([A-Za-z_$][\w$]*)/);return m?m[1]:"UserProgram"}
+function javaForApp(code,cfg){
+ let cls=javaClassName(code)||"UserProgram";
+ if(cls==="MainActivity"){code=code.replace(/\bclass\s+MainActivity\b/,"class UserProgram");cls="UserProgram"}
+ code=code.replace(/^\s*package\s+[^;]+;\s*/m,"");
+ return {className:cls,code:`package ${cfg.pkg};\n\n${code}\n`};
+}
+function androidFiles(cfg,lang,code){
+ const path=cfg.pkg.replace(/\./g,"/");
+ const gradle=`plugins { id 'com.android.application' version '8.5.2' apply false }\n`;
+ const settings=`pluginManagement { repositories { google(); mavenCentral(); gradlePluginPortal() } }\ndependencyResolutionManagement { repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS); repositories { google(); mavenCentral() } }\nrootProject.name='${cfg.name.replace(/'/g,"")}'; include ':app'\n`;
+ const appGradle=`plugins { id 'com.android.application' }\n\nandroid { namespace '${cfg.pkg}'; compileSdk 34\n defaultConfig { applicationId '${cfg.pkg}'; minSdk 21; targetSdk 34; versionCode ${cfg.vc}; versionName '${cfg.version.replace(/'/g,"")}' } }\n`;
+ const manifest=`<manifest xmlns:android="http://schemas.android.com/apk/res/android"><uses-permission android:name="android.permission.INTERNET"/><application android:theme="@style/AppTheme" android:label="${escXml(cfg.name)}" android:icon="@mipmap/ic_launcher"><activity android:name=".MainActivity" android:exported="true" android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"><intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent-filter></activity></application></manifest>`;
+ const style=`<resources><style name="AppTheme" parent="android:style/Theme.Material.Light.NoActionBar"><item name="android:fontFamily">sans</item><item name="android:colorAccent">#3DDC84</item><item name="android:navigationBarColor">#08110C</item><item name="android:statusBarColor">#08110C</item></style></resources>`;
+ const files={
+  "settings.gradle":settings,"build.gradle":gradle,"app/build.gradle":appGradle,
+  "app/src/main/AndroidManifest.xml":manifest,"app/src/main/res/values/styles.xml":style,
+  "app/src/main/res/mipmap-hdpi/ic_launcher.png":iconPng(cfg),
+  "app/src/main/res/mipmap-mdpi/ic_launcher.png":iconPng(cfg),
+  "app/src/main/res/mipmap-xhdpi/ic_launcher.png":iconPng(cfg),
+  "app/src/main/res/mipmap-xxhdpi/ic_launcher.png":iconPng(cfg),
+  "app/src/main/res/mipmap-xxxhdpi/ic_launcher.png":iconPng(cfg)
+ };
+ let main;
+ if(lang==="WEB"){files["app/src/main/assets/index.html"]=code;main=webMain(cfg)}
+ else if(lang==="PYTHON"){files["app/src/main/assets/index.html"]=pyRunner(code);main=webMain(cfg)}
+ else {const j=javaForApp(code,cfg);files[`app/src/main/java/${path}/${j.className}.java`]=j.code;main=javaMain(cfg,j.className)}
+ files[`app/src/main/java/${path}/MainActivity.java`]=main;
+ files[".gitignore"]="*.iml\n.gradle\n/local.properties\n/.idea\n/build\n";
+ files["README.md"]=`# ${cfg.name}\nAPKshala Pro se banaya gaya Android app.\n`;
+ return files;
+}
+function escXml(s){return String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+function webMain(cfg){return `package ${cfg.pkg};\nimport android.app.*;import android.os.*;import android.webkit.*;import android.view.*;\npublic class MainActivity extends Activity{ WebView w; public void onCreate(Bundle b){super.onCreate(b);w=new WebView(this);w.getSettings().setJavaScriptEnabled(true);w.getSettings().setDomStorageEnabled(true);w.setWebViewClient(new WebViewClient());setContentView(w);w.loadUrl("file:///android_asset/index.html");} @Override public void onBackPressed(){if(w.canGoBack())w.goBack();else super.onBackPressed();}}`}
+function pyRunner(code){return `<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{background:#07100b;color:#dff5e6;font:14px monospace;padding:18px}#o{white-space:pre-wrap;background:#0d1711;border:1px solid #274032;border-radius:12px;padding:14px}</style></head><body><h3>Python runner</h3><div id="o">Chal raha hai…</div><script src="https://cdn.jsdelivr.net/pyodide/v0.27.2/full/pyodide.js"><\/script><script>(async()=>{try{const p=await loadPyodide();let o=[];console.log=(...a)=>o.push(a.join("\n"));let v=await p.runPythonAsync(${JSON.stringify(code)});if(v!==undefined)o.push(String(v));document.querySelector("#o").textContent=o.join("\n")||"Done";}catch(e){document.querySelector("#o").textContent=String(e)}})();<\/script></body></html>`}
+function javaMain(cfg,userClass){return `package ${cfg.pkg};\nimport android.app.*;import android.os.*;import android.graphics.Color;import android.widget.*;import java.io.*;import java.lang.reflect.*;\npublic class MainActivity extends Activity{TextView out;StringBuilder log=new StringBuilder();public void onCreate(Bundle b){super.onCreate(b);out=new TextView(this);out.setTextColor(Color.WHITE);out.setTextSize(14);out.setBackgroundColor(Color.rgb(7,11,8));out.setPadding(24,30,24,30);ScrollView s=new ScrollView(this);s.addView(out);setContentView(s);System.setOut(new PrintStream(new OutputStream(){public void write(int x){log.append((char)x);ui();}},true));System.setErr(System.out);new Thread(()->{try{Class<?> c=Class.forName("${cfg.pkg}.${userClass}");Method m=c.getMethod("main",String[].class);m.invoke(null,(Object)new String[]{});}catch(Throwable e){e.printStackTrace();}}).start();}void ui(){runOnUiThread(()->out.setText(log.toString()));}}`}
+function workflow(){return `name: APKshala Build\n\non:\n  push:\n    branches: [ main ]\n\npermissions:\n  contents: read\n\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - name: Setup Java\n        uses: actions/setup-java@v4\n        with:\n          distribution: temurin\n          java-version: '17'\n      - name: Setup Gradle\n        uses: gradle/actions/setup-gradle@v4\n        with:\n          gradle-version: '8.9'\n      - name: Accept Android licenses\n        run: yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true\n      - name: Build APK\n        run: gradle assembleDebug --no-daemon --stacktrace\n      - name: Upload APK\n        uses: actions/upload-artifact@v4\n        with:\n          name: apkshala-apk\n          path: app/build/outputs/apk/debug/*.apk\n`}
+/* GitHub Contents API: serial uploads, workflow LAST. */
+async function ensureRepo(){
+ const owner=state.github.user,repo="apkshala-app";
+ let r=await ghFetch(`https://api.github.com/repos/${encodeURIComponent(owner)}/${repo}`);
+ if(r.ok)return true;
+ if(r.status!==404)throw new Error("Repo check fail: "+r.status);
+ r=await ghFetch("https://api.github.com/user/repos",{method:"POST",body:JSON.stringify({name:repo,private:true,auto_init:true})});
+ if(!(r.ok||r.status===422))throw new Error("Repo create fail: "+r.status);
+ return true;
+}
+async function getSha(path){
+ const r=await ghFetch(`https://api.github.com/repos/${encodeURIComponent(state.github.user)}/apkshala-app/contents/${path}`);
+ if(r.ok){const j=await r.json();return j.sha}return null;
+}
+async function putFile(path,content,message){
+ const url=`https://api.github.com/repos/${encodeURIComponent(state.github.user)}/apkshala-app/contents/${path.split("/").map(encodeURIComponent).join("/")}`;
+ const body={message,content:typeof content==="string"&&/^[A-Za-z0-9+/=]+$/.test(content)&&path.endsWith(".png")?content:b64(content)};
+ let r=await ghFetch(url,{method:"PUT",body:JSON.stringify(body)});
+ if(r.status===409||r.status===422){const sha=await getSha(path);if(sha){body.sha=sha;r=await ghFetch(url,{method:"PUT",body:JSON.stringify(body)})}}
+ if(!r.ok)throw new Error(`${path}: GitHub ${r.status}`);
+ return await r.json();
+}
+function step(name,status="wait",detail=""){return {name,status,detail}}
+function drawSteps(list){$("#steps").innerHTML=list.map((s,i)=>`<div class="step ${s.status}"><span class="dot">${s.status==="done"?"✓":s.status==="error"?"!":s.status==="active"?"":"•"}</span><div>${esc(s.name)}</div><small class="meta">${esc(s.detail||"")}</small></div>`).join("");$("#progress").style.width=(list.filter(x=>x.status==="done").length/list.length*100)+"%"}
+function timerText(sec){const m=String(Math.floor(sec/60)).padStart(2,"0"),s=String(sec%60).padStart(2,"0");return `${m}:${s}`}
+function setStep(list,i,status,detail){list[i].status=status;if(detail!==undefined)list[i].detail=detail;drawSteps(list)}
+async function pollRun(owner,repo,sha,onTick){
+ const start=Date.now();
+ return new Promise((resolve,reject)=>{
+  const check=async()=>{
+   try{
+    const r=await ghFetch(`https://api.github.com/repos/${owner}/${repo}/actions/runs?per_page=5`);
+    if(!r.ok)throw new Error("Actions runs "+r.status);
+    const j=await r.json();const run=j.workflow_runs?.find(x=>x.head_sha===sha);
+    const sec=Math.floor((Date.now()-start)/1000);onTick(sec,run);
+    if(run&&run.status==="completed")return resolve(run);
+    if(sec>=600)return reject(new Error("Build ko 10 minute se zyada ho gaya. GitHub Actions check karo."));
+    setTimeout(check,8000);
+   }catch(e){reject(e)}
+  };check();
+ });
+}
+async function zipEntries(buf){
+ const u=new Uint8Array(buf),v=new DataView(buf);const dec=new TextDecoder();let eocd=-1;
+ for(let p=u.length-22;p>=Math.max(0,u.length-65558);p--){if(v.getUint32(p,true)===0x06054b50){eocd=p;break}}
+ if(eocd<0)throw new Error("ZIP archive nahi mila");
+ const cdSize=v.getUint32(eocd+12,true),cdOff=v.getUint32(eocd+16,true);let p=cdOff,end=cdOff+cdSize,arr=[];
+ while(p<end){if(v.getUint32(p,true)!==0x02014b50)break;const method=v.getUint16(p+10,true),cs=v.getUint32(p+20,true),us=v.getUint32(p+24,true),nl=v.getUint16(p+28,true),xl=v.getUint16(p+30,true),cl=v.getUint16(p+32,true),off=v.getUint32(p+42,true);const name=dec.decode(u.slice(p+46,p+46+nl));arr.push({name,method,cs,us,off});p+=46+nl+xl+cl}
+ const out=[];
+ const read=async ent=>{const q=ent.off;const nl=v.getUint16(q+26,true),xl=v.getUint16(q+28,true),start=q+30+nl+xl;const raw=u.slice(start,start+ent.cs);if(ent.method===0)return raw;if(ent.method===8){const ds=new DecompressionStream("deflate-raw");return new Uint8Array(await new Response(new Blob([raw]).stream().pipeThrough(ds)).arrayBuffer())}throw new Error("ZIP compression unsupported: "+ent.method)};
+ const next=i=>{if(i>=arr.length)return Promise.resolve(out);return read(arr[i]).then(data=>{out.push({...arr[i],data});return next(i+1)})};return next(0);
+}
+function downloadBytes(bytes,name){const blob=new Blob([bytes],{type:"application/vnd.android.package-archive"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000)}
+function textFrom(bytes){return new TextDecoder().decode(bytes)}
+function errorLines(text){const lines=text.split(/\r?\n/),hits=lines.filter(x=>/error:|Exception|FAILED|What went wrong/i.test(x));return (hits.length?hits:lines.slice(-10)).slice(-20).join("\n")}
+
+async function fetchArtifact(run){
+ const r=await ghFetch(`https://api.github.com/repos/${state.github.user}/apkshala-app/actions/artifacts?per_page=20`);
+ if(!r.ok)throw new Error("Artifact list "+r.status);const j=await r.json();const a=j.artifacts?.find(x=>x.workflow_run?.id===run.id&&!x.expired)||j.artifacts?.find(x=>x.name==="apkshala-apk"&&!x.expired);if(!a)throw new Error("APK artifact nahi mila.");
+ const z=await ghFetch(a.archive_download_url,{headers:{"Accept":"application/vnd.github+json"}});
+ if(!z.ok)throw new Error("Artifact download "+z.status);
+ const entries=await zipEntries(await z.arrayBuffer()),apk=entries.find(x=>/\.apk$/i.test(x.name));if(!apk)throw new Error("ZIP mein APK nahi mili.");
+ return {data:apk.data,name:(appCfg().name.replace(/[^a-zA-Z0-9_-]+/g,"_")||"apkshala-app")+".apk",size:apk.data.length};
+}
+async function fetchLogs(run){
+ const r=await ghFetch(`https://api.github.com/repos/${state.github.user}/apkshala-app/actions/runs/${run.id}/logs`);
+ if(!r.ok)throw new Error("Logs "+r.status);const es=await zipEntries(await r.arrayBuffer());return es.filter(x=>/\.txt$/i.test(x.name)).map(x=>textFrom(x.data)).join("\n");
+}
+async function buildApk(){
+ if(!["WEB","PYTHON","JAVA"].includes(state.lang)){toast("APK sirf WEB, PYTHON aur JAVA ke liye supported hai.");return}
+ if(!state.github.token){openModal("connectModal");toast("Pehle GitHub jodo");return}
+ const cfg=appCfg(),files=androidFiles(cfg,state.lang,$("#editor").value),list=[
+ step("GitHub connect","active"),step("Repo ready"),step("Files upload"),step("Build trigger"),step("APK compile"),step("APK phone me aa rahi hai")
+ ];openModal("buildModal");$("#buildResult").innerHTML="";drawSteps(list);
+ try{
+  await ghFetch("https://api.github.com/user").then(r=>{if(!r.ok)throw new Error("GitHub token expire/invalid hai.")});
+  setStep(list,0,"done","OK");setStep(list,1,"active");await ensureRepo();setStep(list,1,"done","apkshala-app");
+  const paths=Object.keys(files).filter(p=>!p.startsWith(".github/"));let i=0;
+  const uploadNext=()=>{if(i>=paths.length)return Promise.resolve();const p=paths[i++];setStep(list,2,"active",`${i}/${paths.length} • ${p}`);return putFile(p,files[p],`APKshala: ${p}`).then(uploadNext)};
+  await uploadNext();setStep(list,2,"done",`${paths.length}/${paths.length}`);
+  setStep(list,3,"active","workflow last");const wf=await putFile(".github/workflows/apkshala.yml",workflow(),"APKshala: trigger build");state.lastSha=wf.commit?.sha||"";localStorage.setItem(KEY+".lastSha",state.lastSha);setStep(list,3,"done",state.lastSha.slice(0,7));
+  setStep(list,4,"active","00:00");const run=await pollRun(state.github.user,"apkshala-app",state.lastSha,(sec,r)=>setStep(list,4,"active",timerText(sec)+(r?` • ${r.status}`:" • run dhoondh rahe hain")));setStep(list,4,run.conclusion==="success"?"done":"error",run.conclusion||run.status);
+  if(run.conclusion!=="success"){let logs="";try{logs=await fetchLogs(run)}catch(e){logs=e.message}throw new Error("Build fail hua.\n\n"+errorLines(logs||"GitHub Actions logs open karke build error dekho."))}
+  setStep(list,5,"active","ZIP parse ho raha hai");const a=await fetchArtifact(run);downloadBytes(a.data,a.name);setStep(list,5,"done",`${(a.size/1024/1024).toFixed(2)} MB`);
+  $("#buildResult").innerHTML=`<div class="success"><b>🎉 APK ready!</b><br><span class="meta">${esc(a.name)} • ${(a.size/1024/1024).toFixed(2)} MB</span><div class="actions" style="margin-top:9px"><button class="btn accent" id="redl">⬇ Dobara download</button></div><div class="note" style="margin-top:9px">Install karne ke liye Android mein “Unknown apps allow karo” agar zaroorat pade.</div></div>`;$("#redl").onclick=()=>downloadBytes(a.data,a.name);toast("APK download start ho gaya",4000);
+ }catch(e){const idx=list.findIndex(x=>x.status==="active");if(idx>=0)setStep(list,idx,"error","Fix neeche dekho");$("#buildResult").innerHTML=`<div class="errorbox"><b>Build ruk gayi.</b><br><br>${esc(e.message)}<br><br><b>FIX:</b> GitHub token scopes/permissions, repo access aur Actions settings check karo. Agar Java code hai to public class aur main() method valid rakho.</div>`}
+}
+$("#apkBtn").onclick=buildApk;
+
+loadLang();
+</script>
 </body>
 </html>
