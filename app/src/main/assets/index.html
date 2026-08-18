@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0a0f0d">
-<title>APKshala Pro</title>
+<title>APK Converter Pro</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -23,11 +23,20 @@ main{max-width:1100px;margin:auto;padding:12px 12px 105px}.langbar{display:flex;
 .preview{padding:14px;min-height:390px;display:grid;place-items:center}.phone{width:min(330px,92vw);aspect-ratio:9/18.5;background:#030604;border:8px solid #1d2520;border-radius:34px;box-shadow:0 20px 70px #000b;position:relative;overflow:hidden}.punch{position:absolute;top:7px;left:50%;transform:translateX(-50%);width:65px;height:18px;border-radius:0 0 13px 13px;background:#050806;z-index:3}.status{height:28px;padding:7px 13px 0;font:10px "JetBrains Mono";display:flex;justify-content:space-between;position:absolute;top:0;left:0;right:0;z-index:2;background:#0005}.webframe{border:0;width:100%;height:100%;background:#fff;padding-top:0}.gesture{position:absolute;bottom:5px;left:50%;transform:translateX(-50%);width:95px;height:4px;border-radius:4px;background:#fff9;z-index:3}.terminal{padding:14px;font:12px/1.55 "JetBrains Mono";min-height:340px;max-height:55vh;overflow:auto;background:#070b08}.termline{margin-bottom:6px;white-space:pre-wrap;word-break:break-word}.cmd{color:var(--cyan)}.out{color:#cfe7d7}.err{color:#ff8a8a}.ok{color:var(--green)}
 .settings{padding:12px;display:grid;gap:10px}.field{display:grid;gap:6px}.field label{font-size:11px;color:var(--muted)}.field input{width:100%;background:#0a100c;border:1px solid var(--line);color:var(--text);border-radius:10px;padding:10px 11px;outline:none}.field input:focus{border-color:#3ddc8466}.swatches{display:flex;gap:8px}.sw{width:28px;height:28px;border-radius:50%;border:2px solid #fff3;cursor:pointer}.sw.active{outline:2px solid var(--text);outline-offset:2px}.note{font-size:11px;line-height:1.5;color:var(--muted);background:#0b130f;border:1px solid var(--line);padding:9px;border-radius:10px}.bottom{position:fixed;z-index:30;left:0;right:0;bottom:0;padding:10px max(10px,env(safe-area-inset-left)) calc(10px + env(safe-area-inset-bottom));background:#09100ddd;border-top:1px solid var(--line);backdrop-filter:blur(18px);display:grid;grid-template-columns:1fr 1fr;gap:9px}.big{min-height:52px;border-radius:15px;font:700 16px "Chakra Petch";border:1px solid #3ddc8455;background:#102318;box-shadow:0 8px 28px #0007}.big.apk{background:#2a1d0f;border-color:#ffb45455;color:var(--amber)}.big:disabled{opacity:.45}.toast{position:fixed;z-index:60;left:50%;bottom:84px;transform:translate(-50%,20px);opacity:0;pointer-events:none;max-width:90vw;background:#15221a;border:1px solid #3ddc8455;border-radius:12px;padding:10px 13px;box-shadow:var(--shadow);font-size:12px;transition:.2s}.toast.show{opacity:1;transform:translate(-50%,0)}.modal{position:fixed;inset:0;z-index:50;background:#000b;display:none;place-items:end center}.modal.show{display:grid}.sheet{width:min(680px,100%);max-height:90vh;overflow:auto;background:#101713;border:1px solid var(--line);border-radius:22px 22px 0 0;padding:15px;box-shadow:0 -20px 80px #000c}.sheet h2{font:700 20px "Chakra Petch";margin:0 0 8px}.close{float:right}.steps{display:grid;gap:8px;margin:12px 0}.step{display:grid;grid-template-columns:25px 1fr auto;align-items:center;gap:8px;padding:9px;border:1px solid var(--line);border-radius:10px;background:#0b120e}.dot{width:20px;height:20px
 ;border-radius:50%;display:grid;place-items:center;background:#18231d;color:#718a7b;font-size:11px}.step.active .dot{border:2px solid var(--green);border-top-color:transparent;animation:spin .8s linear infinite}.step.done .dot{background:#164c2d;color:var(--green)}.step.error .dot{background:#4b1717;color:var(--red)}.bar{height:7px;background:#18221c;border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--green),var(--cyan));transition:width .25s}.success,.errorbox{padding:12px;border-radius:13px;margin-top:10px}.success{background:#0e281a;border:1px solid #3ddc8448}.errorbox{background:#2a1212;border:1px solid #ff6b6b55;color:#ffd1d1;font-size:12px;line-height:1.5}.hidden{display:none!important}@keyframes spin{to{transform:rotate(360deg)}}@media(min-width:760px){.grid{grid-template-columns:1.2fr .8fr}.card.editor-card{grid-row:span 2}.settings-card{grid-column:1/-1}.preview{min-height:55vh}.editor-wrap{height:55vh}.terminal{min-height:55vh;max-height:55vh}}
+
+.iconbox{display:grid;grid-template-columns:96px 1fr;gap:12px;align-items:center;padding:12px;background:#0b130f;border:1px solid var(--line);border-radius:14px}
+.iconpreview{width:96px;height:96px;border-radius:22px;overflow:hidden;background:linear-gradient(135deg,#143021,#0b120e);border:1px solid #3ddc8440;display:grid;place-items:center;box-shadow:0 12px 35px #0008}
+.iconpreview img{width:100%;height:100%;display:block;object-fit:cover}.iconplaceholder{font:700 30px "Chakra Petch";color:var(--green)}
+.iconinfo{display:grid;gap:7px;min-width:0}.iconname{font:600 13px "Chakra Petch";white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.iconmeta{font-size:10px;color:var(--muted);line-height:1.45}
+.uploadbtn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:9px 11px;border-radius:10px;border:1px solid #5ad7e655;background:#0d1b1d;color:var(--cyan);cursor:pointer;font-size:11px;font-weight:600}
+.uploadbtn:active{transform:scale(.97)}.removebtn{color:#ff8a8a;border-color:#ff6b6b44;background:#1c1010}.fileinput{display:none}
+.iconnote{font-size:10px;line-height:1.45;color:#7f988a}.badge{display:inline-flex;align-items:center;gap:5px;width:max-content;padding:4px 7px;border-radius:999px;background:#12351f;color:var(--green);font-size:9px;font-weight:700}
+@media(max-width:390px){.iconbox{grid-template-columns:78px 1fr}.iconpreview{width:78px;height:78px;border-radius:18px}}
 </style>
 </head>
 <body>
 <div class="orb a"></div><div class="orb b"></div>
-<header class="top"><div class="brand"><div class="logo">A</div><div><h1>APKshala Pro</h1><div class="sub">CODE • RUN • APK</div></div></div><button class="chip green" id="githubBtn">GitHub jodo</button></header>
+<header class="top"><div class="brand"><div class="logo">A</div><div><h1>APK Converter Pro</h1><div class="sub">CODE • ICON • APK</div></div></div><button class="chip green" id="githubBtn">GitHub jodo</button></header>
 <main>
   <div class="langbar" id="langs"></div>
   <div class="grid">
@@ -41,13 +50,32 @@ main{max-width:1100px;margin:auto;padding:12px 12px 105px}.langbar{display:flex;
       <div id="output"></div>
     </section>
     <section class="card settings-card">
-      <div class="head"><div><div class="title">App settings</div><div class="meta">APK ke naam aur icon ki setting</div></div></div>
+      <div class="head">
+        <div><div class="title">APK settings</div><div class="meta">Naam, version aur apna custom icon</div></div>
+        <span class="badge">● ICON READY</span>
+      </div>
       <div class="settings">
-        <div class="field"><label>App name</label><input id="appName" value="APKshala App" maxlength="28"></div>
+        <div class="field"><label>App name</label><input id="appName" value="APK Converter Pro" maxlength="28"></div>
         <div class="field"><label>Version</label><input id="version" value="1.0.0" maxlength="12"></div>
-        <div class="field"><label>Icon ka letter</label><input id="iconLetter" value="A" maxlength="1"></div>
-        <div class="field"><label>Icon color</label><div class="swatches" id="swatches"></div></div>
-        <div class="note">Seedhi baat: browser khud APK compile/install nahi kar sakta. Real APK GitHub Actions cloud mein banegi. GitHub token sirf browser ke localStorage mein rahega.</div>
+        <div class="field">
+          <label>App icon — 1:1 square</label>
+          <div class="iconbox">
+            <div class="iconpreview" id="iconPreview"><div class="iconplaceholder" id="iconPlaceholder">A</div></div>
+            <div class="iconinfo">
+              <div class="iconname" id="iconName">Default icon</div>
+              <div class="iconmeta" id="iconMeta">Gallery se PNG, JPG, JPEG, WEBP, GIF, BMP, SVG etc. choose kar sakte ho.</div>
+              <div class="actions">
+                <label class="uploadbtn" for="iconFile">🖼 Gallery se icon lo</label>
+                <input class="fileinput" id="iconFile" type="file" accept="image/*,.png,.jpg,.jpeg,.webp,.gif,.bmp,.svg,.avif,.heic,.heif">
+                <button class="btn small removebtn hidden" id="removeIcon" type="button">✕ Icon hatao</button>
+              </div>
+              <div class="iconnote">10–15 MB file par koi artificial app limit nahi. Build se pehle icon ko 512×512 PNG mein normalize kiya jayega. Final icon 1:1 rahega.</div>
+            </div>
+          </div>
+        </div>
+        <div class="field"><label>Agar icon upload nahi hai: default letter</label><input id="iconLetter" value="A" maxlength="1"></div>
+        <div class="field"><label>Default icon color</label><div class="swatches" id="swatches"></div></div>
+        <div class="note">Browser APK ko khud compile/install nahi karta. Real APK GitHub Actions cloud mein banti hai. Custom icon browser mein 1:1 crop karke PNG banega aur Android project mein use hoga.</div>
       </div>
     </section>
   </div>
@@ -119,7 +147,7 @@ int main(){
   return 0;
 }`
 };
-const state={lang:localStorage.getItem(KEY+".lang")||"WEB",codes:{},github:{user:"",token:""},accent:localStorage.getItem(KEY+".accent")||"#3ddc84",lastSha:localStorage.getItem(KEY+".lastSha")||""};
+const state={lang:localStorage.getItem(KEY+".lang")||"WEB",codes:{},github:{user:"",token:""},accent:localStorage.getItem(KEY+".accent")||"#3ddc84",lastSha:localStorage.getItem(KEY+".lastSha")||"",iconB64:null,iconName:"",iconBytes:0,iconMime:""};
 LANGS.forEach(l=>state.codes[l]=localStorage.getItem(KEY+".code."+l)||samples[l]);
 state.github.user=localStorage.getItem(KEY+".ghUser")||"";
 state.github.token=localStorage.getItem(KEY+".ghToken")||"";
@@ -127,6 +155,50 @@ $("#appName").value=localStorage.getItem(KEY+".appName")||"APKshala App";
 $("#version").value=localStorage.getItem(KEY+".version")||"1.0.0";
 $("#iconLetter").value=localStorage.getItem(KEY+".iconLetter")||"A";
 
+
+function bytesLabel(n){if(!n)return "0 B";const u=["B","KB","MB","GB"],i=Math.min(Math.floor(Math.log(n)/Math.log(1024)),u.length-1);return (n/Math.pow(1024,i)).toFixed(i?2:0)+" "+u[i]}
+function showIconState(){
+ const p=$("#iconPreview"),ph=$("#iconPlaceholder"),nm=$("#iconName"),mt=$("#iconMeta"),rm=$("#removeIcon");
+ if(state.iconB64){
+  ph?.classList.add("hidden");let img=p.querySelector("img");
+  if(!img){img=document.createElement("img");p.appendChild(img)}
+  img.src="data:image/png;base64,"+state.iconB64;
+  nm.textContent=state.iconName||"Custom icon";
+  mt.textContent=`Original ${bytesLabel(state.iconBytes)} • ${state.iconMime||"image"} • final 512×512 PNG`;
+  rm?.classList.remove("hidden");
+ }else{
+  ph?.classList.remove("hidden");const img=p.querySelector("img");if(img)img.remove();
+  const letter=(($("#iconLetter")?.value||"A").trim()[0]||"A").toUpperCase();if(ph)ph.textContent=letter;
+  nm.textContent="Default icon";mt.textContent="Upload nahi kiya — app name/letter se icon banega.";rm?.classList.add("hidden");
+ }
+}
+function imageToSquarePng(file){
+ return new Promise((resolve,reject)=>{
+  const finish=(img,cleanup)=>{
+   try{
+    const w=img.naturalWidth||img.width,h=img.naturalHeight||img.height;if(!w||!h)throw new Error("Image decode nahi hui.");
+    const side=Math.min(w,h),sx=(w-side)/2,sy=(h-side)/2,c=document.createElement("canvas");c.width=c.height=512;
+    const x=c.getContext("2d",{alpha:true});x.clearRect(0,0,512,512);x.imageSmoothingEnabled=true;x.imageSmoothingQuality="high";
+    x.drawImage(img,sx,sy,side,side,0,0,512,512);const url=c.toDataURL("image/png");cleanup?.();resolve(url.split(",")[1]);
+   }catch(e){cleanup?.();reject(e)}
+  };
+  if("createImageBitmap" in window){
+   createImageBitmap(file).then(b=>finish(b,()=>b.close())).catch(()=>{
+    const u=URL.createObjectURL(file),img=new Image();img.onload=()=>finish(img,()=>URL.revokeObjectURL(u));img.onerror=()=>{URL.revokeObjectURL(u);reject(new Error("Is image format ko browser decode nahi kar pa raha."))};img.src=u;
+   });
+  }else{
+   const u=URL.createObjectURL(file),img=new Image();img.onload=()=>finish(img,()=>URL.revokeObjectURL(u));img.onerror=()=>{URL.revokeObjectURL(u);reject(new Error("Is image format ko browser decode nahi kar pa raha."))};img.src=u;
+  }
+ });
+}
+async function handleIconFile(file){
+ if(!file)return;toast("Icon process ho raha hai…");
+ try{
+  const b64=await imageToSquarePng(file);
+  state.iconB64=b64;state.iconName=file.name;state.iconBytes=file.size;state.iconMime=file.type||"image";showIconState();
+  toast(`Icon ready: ${bytesLabel(file.size)} → 512×512 PNG`,3500);
+ }catch(e){toast("Icon nahi laga: "+e.message,4500)}
+}
 function toast(msg,ms=2600){const t=$("#toast");t.textContent=msg;t.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove("show"),ms)}
 function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
 function renderLangs(){ $("#langs").innerHTML=LANGS.map(l=>`<button class="lang ${l===state.lang?"active":""}" data-lang="${l}">${l}</button>`).join("") }
@@ -225,14 +297,22 @@ $$("[data-close]").forEach(b=>b.onclick=()=>closeModal(b.dataset.close));
 const colors=["#3ddc84","#5ad7e6","#ffb454","#ff6b6b","#b28cff","#f472b6"];
 $("#swatches").innerHTML=colors.map(c=>`<button class="sw ${c===state.accent?"active":""}" style="background:${c}" data-color="${c}" aria-label="${c}"></button>`).join("");
 $("#swatches").onclick=e=>{const b=e.target.closest("[data-color]");if(!b)return;state.accent=b.dataset.color;localStorage.setItem(KEY+".accent",state.accent);$$(".sw").forEach(x=>x.classList.toggle("active",x===b))};
+
+$("#iconFile").addEventListener("change",e=>handleIconFile(e.target.files?.[0]));
+$("#removeIcon").addEventListener("click",()=>{state.iconB64=null;state.iconName="";state.iconBytes=0;state.iconMime="";$("#iconFile").value="";showIconState();toast("Custom icon hata diya")});
+$("#iconLetter").addEventListener("input",showIconState);
+showIconState();
 ["appName","version","iconLetter"].forEach(id=>$("#"+id).addEventListener("input",()=>localStorage.setItem(KEY+"."+id,$("#"+id).value)));
 
 function b64(s){const bytes=new TextEncoder().encode(s);let bin="";const step=0x8000;for(let i=0;i<bytes.length;i+=step)bin+=String.fromCharCode(...bytes.subarray(i,i+step));return btoa(bin)}
 function slug(s){let x=s.toLowerCase().replace(/[^a-z0-9]+/g,".").replace(/^\.+|\.+$/g,"");if(!/^[a-z]/.test(x))x="app."+x;return x.slice(0,50)}
 function safeVersionCode(v){const m=String(v).match(/\d+/g)||[1];return Math.max(1,Math.min(999999,parseInt(m.join("").slice(0,6),10)||1))}
-function appCfg(){const name=$("#appName").value.trim()||"APKshala App";return {name,version:$("#version").value.trim()||"1.0.0",pkg:"com.apkshala."+slug(name).replace(/\./g,""),letter:(($("#iconLetter").value||name[0]||"A").trim()[0]||"A").toUpperCase(),color:state.accent,vc:safeVersionCode($("#version").value)}}
+function appCfg(){const name=$("#appName").value.trim()||"APK Converter Pro";return {name,version:$("#version").value.trim()||"1.0.0",pkg:"com.apkshala."+slug(name).replace(/\./g,""),letter:(($("#iconLetter").value||name[0]||"A").trim()[0]||"A").toUpperCase(),color:state.accent,vc:safeVersionCode($("#version").value)}}
 function iconPng(cfg){
- const c=document.createElement("canvas");c.width=c.height=192;const x=c.getContext("2d");x.fillStyle=cfg.color;x.fillRect(0,0,192,192);x.fillStyle="#08110c";x.font="bold 105px sans-serif";x.textAlign="center";x.textBaseline="middle";x.fillText(cfg.letter,96,101);return c.toDataURL("image/png").split(",")[1]
+ if(state.iconB64)return state.iconB64;
+ const c=document.createElement("canvas");c.width=c.height=512;const x=c.getContext("2d");
+ x.fillStyle=cfg.color;x.fillRect(0,0,512,512);x.fillStyle="#08110c";x.font="bold 280px sans-serif";x.textAlign="center";x.textBaseline="middle";x.fillText(cfg.letter,256,270);
+ return c.toDataURL("image/png").split(",")[1]
 }
 function javaClassName(code){const m=code.match(/\b(?:public\s+)?class\s+([A-Za-z_$][\w$]*)/);return m?m[1]:"UserProgram"}
 function javaForApp(code,cfg){
@@ -263,7 +343,7 @@ function androidFiles(cfg,lang,code){
  else {const j=javaForApp(code,cfg);files[`app/src/main/java/${path}/${j.className}.java`]=j.code;main=javaMain(cfg,j.className)}
  files[`app/src/main/java/${path}/MainActivity.java`]=main;
  files[".gitignore"]="*.iml\n.gradle\n/local.properties\n/.idea\n/build\n";
- files["README.md"]=`# ${cfg.name}\nAPKshala Pro se banaya gaya Android app.\n`;
+ files["README.md"]=`# ${cfg.name}\nAPK Converter Pro se banaya gaya Android app.\n`;
  return files;
 }
 function escXml(s){return String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
