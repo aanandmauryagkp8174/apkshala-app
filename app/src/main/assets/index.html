@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0a0f0d">
+<title>APKshala Pro — Multi-Language APK Factory</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0f0d;--panel:#101713;--panel2:#0d1411;--ink:#0b1210;--line:#20302a;--line2:#2e453a;
+--tx:#e6f1ea;--mut:#8aa398;--dim:#5d7268;--grn:#3ddc84;--grn2:#26b56a;--amb:#ffb454;--amb2:#ff8a3d;
+--cyn:#5ad7e6;--red:#ff6b6b;--pnk:#ff5d73;--pur:#b78cff}
+*{margin:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--tx);font-family:'IBM Plex Sans',sans-serif;min-height:100vh;padding-bottom:calc(86px + env(safe-area-inset-bottom))}
+::selection{background:#3ddc8433}
+.bg{position:fixed;inset:0;z-index:-3;background:
+ radial-gradient(700px 480px at 8% -8%,rgba(61,220,132,.11),transparent 60%),
+ radial-gradient(700px 520px at 105% 108%,rgba(255,150,60,.10),transparent 60%),var(--bg)}
+.bg::before{content:'';position:absolute;inset:0;
+ background-image:linear-gradient(rgba(130,170,150,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(130,170,150,.05) 1px,transparent 1px);
+ background-size:32px 32px;
+ -webkit-mask-image:radial-gradient(ellipse at 50% 12%,#000 20%,transparent 75%);mask-image:radial-gradient(ellipse at 50% 12%,#000 20%,transparent 75%)}
+.orb{position:fixed;z-index:-2;border-radius:50%;filter:blur(70px);opacity:.15;pointer-events:none}
+.orb.a{width:340px;height:340px;background:var(--grn);top:-120px;left:-100px;animation:drift 20s ease-in-out infinite alternate}
+.orb.b{width:300px;height:300px;background:var(--amb2);bottom:-120px;right:-90px;animation:drift 26s ease-in-out infinite alternate-reverse}
+@keyframes drift{to{transform:translate(70px,50px) scale(1.12)}}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px;
+ border-bottom:1px solid var(--line);background:#0c120fdd;position:sticky;top:0;z-index:20;backdrop-filter:blur(8px)}
+.brand{display:flex;align-items:center;gap:10px}
+.droid{width:38px;height:28px;filter:drop-shadow(0 0 10px #3ddc8455);animation:bob 4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-3px)}}
+.wm{font-family:'Chakra Petch';font-weight:700;font-size:19px;line-height:1}
+.wm b{color:var(--grn)}
+.tag{font-family:'JetBrains Mono';font-size:8.5px;letter-spacing:2.2px;color:var(--dim);margin-top:3px}
+#ghChip{font-family:'JetBrains Mono';font-size:10px;letter-spacing:.6px;color:var(--mut);background:var(--panel2);
+ border:1px solid var(--line2);border-radius:999px;padding:8px 13px;cursor:pointer;transition:.2s;display:flex;gap:7px;align-items:center}
+#ghChip:active{transform:scale(.95)}
+#ghChip.on{color:var(--grn);border-color:var(--grn2);background:#3ddc8410}
+.langs{display:flex;gap:8px;overflow-x:auto;padding:12px 16px 4px;scrollbar-width:none}
+.langs::-webkit-scrollbar{display:none}
+.lchip{flex-shrink:0;font-family:'Chakra Petch';font-weight:600;font-size:11px;letter-spacing:1.6px;color:var(--mut);
+ background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:8px 15px;cursor:pointer;transition:.18s}
+.lchip:active{transform:scale(.94)}
+.lchip.on{color:#052013;background:var(--grn);border-color:var(--grn);box-shadow:0 4px 16px #3ddc8440}
+.bench{max-width:1100px;margin:0 auto;padding:10px 14px 20px;display:flex;flex-direction:column;gap:14px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 16px 40px #00000059;animation:rise .5s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}}
+.phead{display:flex;align-items:center;gap:9px;padding:10px 13px;border-bottom:1px solid var(--line);background:var(--panel2)}
+.tick{width:8px;height:8px;border-radius:2px}
+.ptitle{font-family:'Chakra Petch';font-weight:700;font-size:11px;letter-spacing:2.2px}
+.pspace{flex:1}
+.chip{font-family:'JetBrains Mono';font-size:10px;color:var(--mut);background:#0c1310;border:1px solid var(--line2);border-radius:6px;padding:5px 10px;cursor:pointer;transition:.18s}
+.chip:active{transform:scale(.94)}
+.editwrap{display:flex;background:var(--ink);height:300px}
+.gutter{width:40px;background:#0a100d;color:#3c574b;font-family:'JetBrains Mono';font-size:12.5px;line-height:20px;
+ text-align:right;padding:10px 7px 10px 0;user-select:none;overflow:hidden;border-right:1px solid #16221c;white-space:pre}
+#code{flex:1;background:transparent;border:0;outline:0;resize:none;color:#d9e8df;font-family:'JetBrains Mono';
+ font-size:12.5px;line-height:20px;padding:10px 12px;white-space:pre;overflow:auto;caret-color:var(--grn)}
+.statusbar{display:flex;justify-content:space-between;gap:8px;padding:7px 12px;border-top:1px solid var(--line);
+ font-family:'JetBrains Mono';font-size:9.5px;color:var(--dim);background:var(--panel2)}
+.statusbar b{color:var(--mut);font-weight:500}
+.prevbody{padding:14px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.phone{width:250px;height:480px;background:#050807;border:1px solid #2c3d34;border-radius:32px;padding:8px;position:relative;
+ box-shadow:0 24px 60px #00000080,0 0 0 5px #0d1411}
+.hole{position:absolute;top:15px;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:#000;border:2px solid #101713;z-index:3}
+.screen{width:100%;height:100%;border-radius:25px;overflow:hidden;background:#000;display:flex;flex-direction:column}
+.pstat{height:24px;background:#050807;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-family:'JetBrains Mono';font-size:9px;color:#cfe8db}
+#frame{flex:1;border:0;background:#fff;width:100%}
+.pnav{height:18px;background:#050807;display:flex;align-items:center;justify-content:center}
+.pnav i{width:70px;height:4px;border-radius:99px;background:#cfe8db66}
+.hidden{display:none!important}
+.term{width:100%;background:#060a08;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.thead{display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid var(--line);background:var(--panel2);
+ font-family:'Chakra Petch';font-size:10px;letter-spacing:2px;color:var(--dim)}
+.led{width:7px;height:7px;border-radius:50%;background:var(--grn);box-shadow:0 0 8px var(--grn);animation:pulse 1.8s infinite}
+@keyframes pulse{50%{opacity:.35}}
+#tlog{padding:12px;font-family:'JetBrains Mono';font-size:11.5px;line-height:1.75;min-height:180px;max-height:300px;overflow:auto;white-space:pre-wrap;word-break:break-word}
+#tlog .cmd{color:var(--cyn)} #tlog .out{color:#cfe4d8} #tlog .err{color:#ff9d9d} #tlog .ok{color:var(--grn)} #tlog .dim{color:var(--dim)}
+.botbar{position:fixed;left:0;right:0;bottom:0;z-index:25;display:flex;gap:10px;padding:12px 14px calc(12px + env(safe-area-inset-bottom));
+ background:#0c120fee;backdrop-filter:blur(10px);border-top:1px solid var(--line)}
+.btn{font-family:'Chakra Petch';font-weight:700;letter-spacing:1.4px;border:0;cursor:pointer;border-radius:11px;
+ display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.18s}
+.btn:active{transform:scale(.96)}
+.btn.run{flex:1;background:var(--grn);color:#052013;font-size:14px;padding:15px 10px;box-shadow:0 8px 24px #3ddc8435}
+.btn.apk{flex:1.3;background:linear-gradient(135deg,var(--amb),var(--amb2));color:#241100;font-size:14px;padding:15px 10px;box-shadow:0 8px 24px #ff8a3d35;position:relative;overflow:hidden}
+.btn.apk::after{content:'';position:absolute;top:0;left:-80%;width:45%;height:100%;background:linear-gradient(100deg,transparent,#ffffff55,transparent);transform:skewX(-20deg);animation:shine 3.5s infinite}
+@keyframes shine{0%,60%{left:-80%}100%{left:130%}}
+.overlay{position:fixed;inset:0;background:#050806e8;backdrop-filter:blur(5px);z-index:50;display:flex;align-items:center;justify-content:center;padding:18px}
+.obuild{width:100%;max-width:440px;background:var(--panel);border:1px solid var(--line2);border-radius:14px;padding:20px;
+ box-shadow:0 40px 100px #000c;animation:pop .3s cubic-bezier(.2,1.4,.5,1) both;max-height:88vh;overflow:auto}
+@keyframes pop{from{opacity:0;transform:scale(.92) translateY(12px)}}
+.ohead{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:10px}
+.otitle{font-family:'Chakra Petch';font-weight:700;font-size:14.5px;letter-spacing:.6px}
+.ox{background:none;border:1px solid var(--line2);color:var(--mut);width:28px;height:28px;border-radius:7px;cursor:pointer;flex-shrink:0}
+.osteps{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.osteps li{display:flex;align-items:flex-start;gap:11px;font-size:12px;color:var(--dim);transition:.3s}
+.osteps li.run{color:var(--tx)} .osteps li.done{color:var(--mut)}
+.ost{width:19px;height:19px;flex-shrink:0;border-radius:50%;border:2px solid var(--line2);margin-top:1px}
+li.run .ost{border-color:var(--grn);border-top-color:transparent;animation:spin .7s linear infinite}
+li.done .ost{border-color:var(--grn);background:#3ddc8422}
+li.done .ost::after{content:'✓';color:var(--grn);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:10px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.obar{height:6px;border-radius:99px;background:#0c1310;overflow:hidden;border:1px solid var(--line)}
+#oFill{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--grn2),var(--grn),var(--amb));transition:width .5s ease}
+.errbox{margin-top:14px;background:#2a0f0f;border:1px solid #ff6b6b55;border-radius:9px;padding:11px;font-family:'JetBrains Mono';font-size:10.5px;color:#ffb3b3;white-space:pre-wrap;word-break:break-word}
+.odone{text-align:center;padding-top:16px;position:relative}
+.obig{font-size:40px;animation:pop .4s .1s both}
+.ohtitle{font-family:'Chakra Petch';font-weight:700;font-size:18px;margin-top:4px}
+.osub{font-size:11.5px;color:var(--mut);margin-top:8px;line-height:1.6}
+.ofile{display:inline-block;font-family:'JetBrains Mono';font-size:10.5px;color:var(--amb);background:#ffb45414;border:1px solid #ffb45433;border-radius:6px;padding:5px 12px;margin-top:10px}
+.obtns{display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+.btn.small{font-size:11px;padding:10px 16px;letter-spacing:1px}
+.btn.ghost{background:transparent;border:1px solid var(--line2);color:var(--mut)}
+.btn.grn{background:var(--grn);color:#052013}
+a.lnk{color:var(--cyn);font-size:11px}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.field label{font-family:'JetBrains Mono';font-size:9.5px;letter-spacing:1.8px;color:var(--dim);text-transform:uppercase}
+.field input{background:var(--ink);border:1px solid var(--line2);border-radius:8px;color:var(--tx);padding:11px 12px;
+ font-family:'JetBrains Mono';font-size:12px;outline:0;width:100%}
+.field input:focus{border-color:var(--grn);box-shadow:0 0 0 3px #3ddc8422}
+.gguide{font-size:11px;color:var(--mut);line-height:1.7;background:var(--ink);border:1px dashed var(--line2);border-radius:9px;padding:11px 12px;margin-bottom:14px}
+.gguide b{color:var(--tx)} .gguide .w{color:var(--amb)}
+.honest{font-size:10.5px;line-height:1.6;color:var(--dim);margin-top:12px}
+.honest b{color:var(--mut)}
+#toast{position:fixed;bottom:calc(90px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%) translateY(16px);
+ background:var(--panel);border:1px solid var(--grn2);color:var(--tx);font-family:'JetBrains Mono';font-size:11px;
+ padding:10px 18px;border-radius:9px;opacity:0;transition:.3s;z-index:60;pointer-events:none;box-shadow:0 12px 30px #0009;max-width:92vw;text-align:center}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+::-webkit-scrollbar{width:7px;height:7px}::-webkit-scrollbar-thumb{background:#22352c;border-radius:99px}
+@media(min-width:900px){.bench{display:grid;grid-template-columns:1.1fr 1fr;align-items:start}.bench .panel:last-child{grid-column:1/-1}}
+</style>
+</head>
+<body>
+<div class="bg"></div><div class="orb a"></div><div class="orb b"></div>
+
+<header class="topbar">
+  <div class="brand">
+    <svg class="droid" viewBox="0 0 48 34">
+      <line x1="13" y1="2" x2="18" y2="10" stroke="#3ddc84" stroke-width="2.6" stroke-linecap="round"/>
+      <line x1="35" y1="2" x2="30" y2="10" stroke="#3ddc84" stroke-width="2.6" stroke-linecap="round"/>
+      <path d="M5 31a19 19 0 0 1 38 0Z" fill="#3ddc84"/>
+      <circle cx="16.5" cy="22" r="2.7" fill="#0a0f0d"/><circle cx="31.5" cy="22" r="2.7" fill="#0a0f0d"/>
+    </svg>
+    <div><div class="wm"><b>APK</b>shala <span style="color:var(--amb)">PRO</span></div>
+    <div class="tag">MULTI-LANGUAGE · GITHUB CLOUD APK · v2.2</div></div>
+  </div>
+  <button id="ghChip">🔗 GitHub jodo</button>
+</header>
+
+<div class="langs" id="langs">
+  <button class="lchip on" data-l="web">🌐 WEB</button>
+  <button class="lchip" data-l="python">🐍 PYTHON</button>
+  <button class="lchip" data-l="java">☕ JAVA</button>
+  <button class="lchip" data-l="js">⚡ JS</button>
+  <button class="lchip" data-l="c">🇨 C</button>
+  <button class="lchip" data-l="cpp">➕ C++</button>
+</div>
+
+<main class="bench">
+  <section class="panel">
+    <div class="phead">
+      <span class="tick" style="background:var(--grn)"></span>
+      <span class="ptitle" style="color:var(--grn)">CODE</span>
+      <span id="fname" style="font-family:'JetBrains Mono';font-size:10px;color:var(--dim)">index.html</span>
+      <span class="pspace"></span>
+      <button class="chip" id="btnSample">◈ SAMPLE</button>
+      <button class="chip" id="btnClear">✕</button>
+    </div>
+    <div class="editwrap">
+      <div class="gutter" id="gutter">1</div>
+      <textarea id="code" wrap="off" spellcheck="false"></textarea>
+    </div>
+    <div class="statusbar"><span><b id="stLines">0</b> lines</span><span>run: <b id="stRun">—</b></span></div>
+  </section>
+
+  <section class="panel">
+    <div class="phead">
+      <span class="tick" style="background:var(--cyn)"></span>
+      <span class="ptitle" style="color:var(--cyn)">OUTPUT</span>
+      <span class="pspace"></span>
+      <span id="modeTag" style="font-family:'JetBrains Mono';font-size:9.5px;color:var(--dim)">PHONE PREVIEW</span>
+    </div>
+    <div class="prevbody">
+      <div class="phone" id="phoneBox">
+        <div class="hole"></div>
+        <div class="screen">
+          <div class="pstat"><span id="phTime">--:--</span><span>▂▄▆ 🔋</span></div>
+          <iframe id="frame" title="preview"></iframe>
+          <div class="pnav"><i></i></div>
+        </div>
+      </div>
+      <div class="term hidden" id="termBox">
+        <div class="thead"><span class="led"></span> TERMINAL · CLOUD RUN</div>
+        <div id="tlog"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="phead">
+      <span class="tick" style="background:var(--amb)"></span>
+      <span class="ptitle" style="color:var(--amb)">APP SETTINGS</span>
+    </div>
+    <div style="padding:14px;display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div class="field" style="margin:0"><label>App naam</label><input type="text" id="appName" value="Meri App" maxlength="25"></div>
+      <div class="field" style="margin:0"><label>Version</label><input type="text" id="appVer" value="1.0" maxlength="10"></div>
+    </div>
+    <p class="honest" style="padding:0 14px 14px">⬇ <b>APK BANAO</b> → code GitHub upload → cloud me real APK compile (1-3 min) → .apk phone me download. Token me <b>repo + workflow</b> dono scope zaruri hain.</p>
+  </section>
+</main>
+
+<div class="botbar">
+  <button class="btn run" id="btnRun">▶ RUN</button>
+  <button class="btn apk" id="btnApk">⬇ APK BANAO</button>
+</div>
+
+<div class="overlay hidden" id="ghSheet">
+  <div class="obuild">
+    <div class="ohead"><div class="otitle">🔗 GitHub se jodo (1 minute)</div><button class="ox" id="ghClose">✕</button></div>
+    <div class="gguide">
+      <b>Token banane ke steps:</b><br>
+      1. <span class="w">github.com</span> login → <b>Settings → Developer settings</b><br>
+      2. <b>Personal access tokens → Tokens (classic)</b><br>
+      3. <b>Generate new token (classic)</b><br>
+      4. Scopes me <b>✔ repo</b> AUR <b>✔ workflow</b> — <span class="w">DONO tick karo</span><br>
+      5. Generate → token copy → neeche paste<br>
+      ⚠ Token secret hai — kisi ko mat dikhana.
+    </div>
+    <div class="field"><label>GitHub username</label><input type="text" id="ghUser" autocapitalize="off"></div>
+    <div class="field"><label>Personal Access Token (repo + workflow)</label><input type="password" id="ghToken" autocapitalize="off"></div>
+    <button class="btn grn" style="width:100%;padding:13px;font-size:13px" id="ghConnect">✓ CONNECT KARO</button>
+    <p class="honest">Token sirf aapke browser me save hota hai.</p>
+  </div>
+</div>
+
+<div class="overlay hidden" id="overlay">
+  <div class="obuild">
+    <div class="ohead"><div class="otitle" id="oTitle">…</div><button class="ox" id="oCloseBtn">✕</button></div>
+    <ul class="osteps" id="oSteps"></ul>
+    <div class="obar"><i id="oFill"></i></div>
+    <div class="errbox hidden" id="oErr"></div>
+    <div class="odone hidden" id="oDone">
+      <div class="obig">🎉</div>
+      <div class="ohtitle">APK taiyaar hai!</div>
+      <div class="osub">Download shuru ho gayi — file kholkar <b>Install</b> dabao.<br>(Settings → "Unknown apps install" allow karna padega)</div>
+      <div class="ofile" id="oFile"></div>
+      <div class="obtns">
+        <button class="btn small grn" id="oRedl">⬇ DOBARA DOWNLOAD</button>
+        <button class="btn small ghost" id="oClose2">BAND KARO</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+var $=function(id){return document.getElementById(id)};
+var enc=new TextEncoder();
+function toast(m){var t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(function(){t.classList.remove('show')},3200)}
+function u8b64(u){var s='';for(var i=0;i<u.length;i+=0x8000)s+=String.fromCharCode.apply(null,u.subarray(i,i+0x8000));return btoa(s)}
+function b64u8(b){var bin=atob(b),u=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return u}
+function shade(h,p){var n=parseInt(h.slice(1),16),r=(n>>16)&255,g=(n>>8)&255,b=n&255;
+ r=Math.max(0,Math.min(255,Math.round(r+p*255)));g=Math.max(0,Math.min(255,Math.round(g+p*255)));b=Math.max(0,Math.min(255,Math.round(b+p*255)));
+ return '#'+((1<<24)+(r<<16)+(g<<8)+b).toString(16).slice(1)}
+function slugify(s){return ((''+s).toLowerCase().replace(/[^a-z0-9]+/g,'').replace(/^[0-9]+/,''))||'myapp'}
+
+var LANGS={
+ web:{file:'index.html',apk:true},
+ python:{file:'main.py',cands:['python','python3'],cmd:'python main.py',apk:true},
+ java:{file:null,cands:['java'],cmd:'javac + java',apk:true},
+ js:{file:'script.js',cands:['javascript','node'],cmd:'node script.js',apk:false},
+ c:{file:'main.c',cands:['c'],cmd:'gcc main.c && ./a.out',apk:false},
+ cpp:{file:'main.cpp',cands:['c++','cpp'],cmd:'g++ main.cpp && ./a.out',apk:false}
+};
+var SAMPLES={
+ web:'<!DOCTYPE html>\n<html>\n<head>\n<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1.0">\n<style>\n  *{margin:0;box-sizing:border-box}\n  body{min-height:100vh;display:flex;align-items:center;justify-content:center;\n    font-family:system-ui;background:linear-gradient(160deg,#0e3b2e,#12283a)}\n  .card{background:#101d18;border:1px solid #2c4a3c;padding:30px;border-radius:18px;\n    text-align:center;color:#fff;width:84%;box-shadow:0 30px 60px #0006}\n  #num{font-size:60px;font-weight:800;color:#3ddc84;margin:12px 0 18px}\n  button{background:#3ddc84;color:#06281a;border:0;font-size:15px;font-weight:700;\n    padding:12px 28px;border-radius:999px;cursor:pointer}\n  button:active{transform:scale(.9)}\n</style>\n</head>\n<body>\n  <div class="card">\n    <h1>🚀 Meri App</h1>\n    <div id="num">0</div>\n    <button onclick="n++;document.getElementById(\'num\').textContent=n;console.log(\'Tap #\'+n)">+1 TAP</button>\n  </div>\n<script>var n=0;console.log(\'App ready ✅\');<\/script>\n</body>\n</html>',
+ python:'# 🐍 Meri Python App\nnaam = "Dost"\nprint("Namaste,", naam, "!")\nfor i in range(1, 6):\n    print(i, "→ Python chal raha hai")\nprint("✅ Ho gaya!")',
+ java:'public class Main {\n    public static void main(String[] args) {\n        System.out.println("Namaste Java! ☕");\n        for (int i = 1; i <= 5; i++) {\n            System.out.println(i + " → Java chal raha hai");\n        }\n        System.out.println("✅ Ho gaya!");\n    }\n}',
+ js:'// ⚡ Node JS\nconsole.log("Namaste JS!");\nlet sum = 0;\nfor (let i = 1; i <= 5; i++) sum += i;\nconsole.log("1 se 5 ka sum =", sum);',
+ c:'#include <stdio.h>\nint main() {\n    printf("Namaste C!\\n");\n    for (int i = 1; i <= 5; i++) printf("%d → C chal raha hai\\n", i);\n    return 0;\n}',
+ cpp:'#include <iostream>\nusing namespace std;\nint main() {\n    cout << "Namaste C++!" << endl;\n    for (int i = 1; i <= 5; i++) cout << i << " → C++ chal raha hai" << endl;\n    return 0;\n}'
+};
+var cur='web';
+
+var ta=$('code'),gutter=$('gutter');
+function updateGutter(){var n=ta.value.split('\n').length;
+ gutter.textContent=Array.from({length:n},function(_,i){return i+1}).join('\n');
+ $('stLines').textContent=n}
+function saveAll(){try{var s=JSON.parse(localStorage.getItem('apkshala2')||'{}');s['code_'+cur]=ta.value;localStorage.setItem('apkshala2',JSON.stringify(s))}catch(e){}}
+ta.addEventListener('input',function(){updateGutter();saveAll()});
+ta.addEventListener('scroll',function(){gutter.scrollTop=ta.scrollTop});
+ta.addEventListener('keydown',function(e){if(e.key==='Tab'){e.preventDefault();var s=ta.selectionStart;ta.setRangeText('  ',s,ta.selectionEnd,'end');updateGutter()}});
+$('btnClear').onclick=function(){ta.value='';updateGutter();saveAll()};
+$('btnSample').onclick=function(){ta.value=SAMPLES[cur];updateGutter();saveAll();runCode();toast('Sample load ho gaya ◈')};
+
+function switchLang(l){
+  saveAll();cur=l;
+  document.querySelectorAll('.lchip').forEach(function(c){c.classList.toggle('on',c.dataset.l===l)});
+  var saved=null;try{saved=JSON.parse(localStorage.getItem('apkshala2')||'{}')['code_'+l]}catch(e){}
+  ta.value=(saved&&saved.trim())?saved:SAMPLES[l];
+  $('fname').textContent=LANGS[l].file||(javaInfo(ta.value).name+'.java');
+  var webish=(l==='web');
+  $('phoneBox').classList.toggle('hidden',!webish);
+  $('termBox').classList.toggle('hidden',webish);
+  $('modeTag').textContent=webish?'PHONE PREVIEW':'TERMINAL OUTPUT';
+  updateGutter();runCode();
+}
+document.querySelectorAll('.lchip').forEach(function(c){c.onclick=function(){switchLang(c.dataset.l)}});
+
+function withBridge(html){
+  var br='<script>(function(){var p=function(t,a){try{parent.postMessage({__apk:1,t:t,m:a.map(function(x){try{return typeof x==="object"?JSON.stringify(x):String(x)}catch(e){return String(x)}}).join(" ")},\'*\')}catch(e){}};[\'log\',\'warn\',\'error\'].forEach(function(k){var o=console[k].bind(console);console[k]=function(){p(k,[].slice.call(arguments));o.apply(null,arguments)}});window.addEventListener(\'error\',function(e){p(\'error\',[e.message+\' (line \'+e.lineno+\')\'])})})();<\/script>';
+  if(/<head[^>]*>/i.test(html))return html.replace(/<head[^>]*>/i,function(m){return m+br});
+  return br+html;
+}
+window.addEventListener('message',function(e){
+  if(e.data&&e.data.__apk&&!$('termBox').classList.contains('hidden'))termLine(e.data.m,e.data.t==='error'?'err':'out');
+});
+function runWeb(){$('frame').srcdoc=withBridge(ta.value)}
+
+function termClear(){$('tlog').innerHTML=''}
+function termLine(t,cls){var d=document.createElement('div');d.className=cls||'out';d.textContent=t;$('tlog').appendChild(d);$('tlog').scrollTop=1e6}
+var RT=null;
+function pistonExec(key,code,fname){
+  var L=LANGS[key];
+  return fetch('https://emkc.org/api/v2/piston/runtimes').then(function(r){return r.json()}).then(function(rt){RT=rt;
+    var found=null;RT.forEach(function(r){if(!found&&L.cands.indexOf(r.language)>-1)found=r});
+    if(!found)throw new Error('runtime nahi mila');
+    return fetch('https://emkc.org/api/v2/piston/execute',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({language:found.language,version:found.version,files:[{name:fname,content:code}]})});
+  }).then(function(r){return r.json()});
+}
+function pyodideRun(code){
+  termLine('… Pyodide (browser Python) load ho raha hai','dim');
+  var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js';
+  s.onload=function(){loadPyodide({indexURL:'https://cdn.jsdelivr.net/pyodide/v0.26.4/full/'}).then(function(py){
+    py.setStdout({batched:function(t){termLine(t,'out')}});py.setStderr({batched:function(t){termLine(t,'err')}});
+    return py.runPythonAsync(code).then(function(){termLine('✓ exit 0','ok')}).catch(function(e){termLine('❌ '+e.message,'err')});
+  })};
+  s.onerror=function(){termLine('❌ Python load nahi ho saka (internet check karo)','err')};
+  document.head.appendChild(s);
+}
+function runCode(){
+  $('stRun').textContent=new Date().toLocaleTimeString('en-IN',{hour12:false});
+  if(cur==='web'){runWeb();return}
+  termClear();termLine('$ '+LANGS[cur].cmd,'cmd');
+  var fname=LANGS[cur].file;
+  if(cur==='java')fname=javaInfo(ta.value).name+'.java';
+  pistonExec(cur,ta.value,fname).then(function(j){
+    if(j.compile&&j.compile.stderr)termLine(j.compile.stderr.trim(),'err');
+    if(j.run&&j.run.stdout)j.run.stdout.replace(/\n$/,'').split('\n').forEach(function(l){termLine(l,'out')});
+    if(j.run&&j.run.stderr)j.run.stderr.replace(/\n$/,'').split('\n').forEach(function(l){termLine(l,'err')});
+    termLine((j.run&&j.run.code)?'✗ exit '+j.run.code:'✓ exit 0',(j.run&&j.run.code)?'err':'ok');
+  }).catch(function(e){
+    if(cur==='python')pyodideRun(ta.value);
+    else if(cur==='js'){$('frame').srcdoc=withBridge('<script>'+ta.value+'<\/script>');termLine('… browser-fallback me chal raha hai','dim')}
+    else termLine('❌ Cloud run nahi ho saka: '+e.message,'err');
+  });
+}
+$('btnRun').onclick=runCode;
+function tickClock(){var d=new Date();$('phTime').textContent=('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2)}
+tickClock();setInterval(tickClock,15000);
+
+function iconU8(size){
+  var c=document.createElement('canvas');c.width=c.height=size;var x=c.getContext('2d');
+  var g=x.createLinearGradient(0,0,0,size);g.addColorStop(0,'#3ddc84');g.addColorStop(1,shade('#3ddc84',-0.22));
+  x.beginPath();if(x.roundRect)x.roundRect(0,0,size,size,size*0.225);else x.rect(0,0,size,size);
+  x.save();x.clip();x.fillStyle=g;x.fillRect(0,0,size,size);
+  x.fillStyle='#fff';x.textAlign='center';x.textBaseline='middle';
+  x.font='700 '+Math.round(size*0.48)+'px sans-serif';
+  x.fillText((($('appName').value.trim()[0])||'A').toUpperCase(),size/2,size*0.54);x.restore();
+  return b64u8(c.toDataURL('image/png').split(',')[1]);
+}
+function javaInfo(code){
+  var m=code.match(/class\s+([A-Za-z_$][\w$]*)/);var name=m?m[1]:'Main';
+  if(name==='MainActivity'){code=code.replace(/class\s+MainActivity/,'class UserMain');name='UserMain'}
+  return {name:name,code:code};
+}
+
+function unzip(buf){
+  var u8=new Uint8Array(buf),dv=new DataView(buf),eocd=-1;
+  for(var i=u8.length-22;i>=0;i--){if(dv.getUint32(i,true)===0x06054b50){eocd=i;break}}
+  if(eocd<0)return [];
+  var count=dv.getUint16(eocd+10,true),off=dv.getUint32(eocd+16,true),out=[];
+  for(var k=0;k<count;k++){
+    var method=dv.getUint16(off+10,true),csize=dv.getUint32(off+20,true);
+    var nlen=dv.getUint16(off+28,true),elen=dv.getUint16(off+30,true),clen=dv.getUint16(off+32,true);
+    var name=new TextDecoder().decode(u8.slice(off+46,off+46+nlen));
+    var loff=dv.getUint32(off+42,true);
+    var lnlen=dv.getUint16(loff+26,true),lelen=dv.getUint16(loff+28,true);
+    var d=loff+30+lnlen+lelen;
+    out.push({name:name,method:method,data:u8.slice(d,d+csize)});
+    off+=46+nlen+elen+clen;
+  }
+  return out;
+}
+function inflate(data){
+  var ds=new DecompressionStream('deflate-raw');
+  return new Response(new Blob([data]).stream().pipeThrough(ds)).arrayBuffer().then(function(b){return new Uint8Array(b)});
+}
+
+var GH={user:'',token:''};
+try{GH.user=localStorage.getItem('apk_gh_user')||'';GH.token=localStorage.getItem('apk_gh_token')||''}catch(e){}
+var REPO='apkshala-app';
+function ghChipUpdate(){$('ghChip').textContent=GH.token?('✓ @'+GH.user):'🔗 GitHub jodo';$('ghChip').classList.toggle('on',!!GH.token)}
+ghChipUpdate();
+$('ghChip').onclick=function(){$('ghSheet').classList.remove('hidden');$('ghUser').value=GH.user;$('ghToken').value=GH.token};
+$('ghClose').onclick=function(){$('ghSheet').classList.add('hidden')};
+function authH(){return {'Authorization':'Bearer '+GH.token,'Accept':'application/vnd.github+json'}}
+function gh(path,opts){
+  opts=opts||{};opts.headers=Object.assign({},authH(),opts.headers||{});
+  return fetch('https://api.github.com'+path,opts).then(function(r){
+    if(!r.ok)return r.text().then(function(t){throw new Error('GitHub '+r.status+' — '+t.slice(0,160))});
+    return r.status===204?null:r.json();
+  });
+}
+$('ghConnect').onclick=function(){
+  var u=$('ghUser').value.trim(),t=$('ghToken').value.trim();
+  if(!u||!t){toast('Username aur token dono bharo');return}
+  GH.token=t;
+  gh('/user').then(function(j){
+    GH.user=j.login;
+    try{localStorage.setItem('apk_gh_user',GH.user);localStorage.setItem('apk_gh_token',GH.token)}catch(e){}
+    ghChipUpdate();$('ghSheet').classList.add('hidden');
+    toast('✅ Connect ho gaya: @'+GH.user);
+  }).catch(function(e){GH.token='';toast('❌ '+e.message)});
+};
+
+function androidFiles(){
+  var code=ta.value.trim();
+  var name=$('appName').value.trim()||'My App';
+  var slug=slugify(name);
+  var pkg='com.apkshala.'+slug;
+  var jp=pkg.replace(/\./g,'/');
+  var WF='name: APK Banao\non:\n  push:\n  workflow_dispatch:\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-java@v4\n        with:\n          distribution: temurin\n          java-version: \'17\'\n          cache: gradle\n      - uses: gradle/actions/setup-gradle@v4\n      - run: gradle wrapper --gradle-version 8.9\n      - run: ./gradlew assembleDebug\n      - uses: actions/upload-artifact@v4\n        with:\n          name: app-debug-apk\n          path: app/build/outputs/apk/debug/*.apk\n';
+  var SG='pluginManagement {\n    repositories { google(); mavenCentral(); gradlePluginPortal() }\n}\ndependencyResolutionManagement {\n    repositories { google(); mavenCentral() }\n}\nrootProject.name = "'+name.replace(/"/g,'')+'"\ninclude \':app\'\n';
+  var BG='plugins {\n    id \'com.android.application\' version \'8.5.2\' apply false\n}\n';
+  var AG='plugins {\n    id \'com.android.application\'\n}\nandroid {\n    namespace \''+pkg+'\'\n    compileSdk 34\n    defaultConfig {\n        applicationId "'+pkg+'"\n        minSdk 21\n        targetSdk 34\n        versionCode 1\n        versionName "'+($('appVer').value.trim()||'1.0')+'"\n    }\n    compileOptions {\n        sourceCompatibility JavaVersion.VERSION_1_8\n        targetCompatibility JavaVersion.VERSION_1_8\n    }\n}\n';
+  var MF='<?xml version="1.0" encoding="utf-8"?>\n<manifest xmlns:android="http://schemas.android.com/apk/res/android">\n    <uses-permission android:name="android.permission.INTERNET" />\n    <application\n        android:label="'+name.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;')+'"\n        android:icon="@mipmap/ic_launcher"\n        android:allowBackup="true"\n        android:hardwareAccelerated="true"\n        android:usesCleartextTraffic="true"\n        android:theme="@android:style/Theme.DeviceDefault.NoTitleBar">\n        <activity android:name=".MainActivity" android:exported="true"\n            android:configChanges="orientation|screenSize|keyboardHidden">\n            <intent-filter>\n                <action android:name="android.intent.action.MAIN" />\n                <category android:name="android.intent.category.LAUNCHER" />\n            </intent-filter>\n        </activity>\n    </application>\n</manifest>\n';
+  var MJ='package '+pkg+';\n\nimport android.app.Activity;\nimport android.os.Bundle;\nimport android.webkit.WebSettings;\nimport android.webkit.WebView;\nimport android.webkit.WebViewClient;\n\npublic class MainActivity extends Activity {\n    private WebView web;\n    protected void onCreate(Bundle s) {\n        super.onCreate(s);\n        web = new WebView(this);\n        WebSettings st = web.getSettings();\n        st.setJavaScriptEnabled(true);\n        st.setDomStorageEnabled(true);\n        st.setAllowFileAccess(true);\n        web.setWebViewClient(new WebViewClient());\n        web.loadUrl("file:///android_asset/index.html");\n        setContentView(web);\n    }\n    public void onBackPressed() {\n        if (web != null && web.canGoBack()) web.goBack(); else super.onBackPressed();\n    }\n}\n';
+  var files=[
+    {path:'settings.gradle',data:enc.encode(SG)},
+    {path:'build.gradle',data:enc.encode(BG)},
+    {path:'app/build.gradle',data:enc.encode(AG)},
+    {path:'app/src/main/AndroidManifest.xml',data:enc.encode(MF)},
+    {path:'app/src/main/res/mipmap/ic_launcher.png',data:iconU8(96)}
+  ];
+  if(cur==='java'){
+    var ji=javaInfo(code);
+    var uc=ji.code;
+    if(/^\s*package\s+/m.test(uc))uc=uc.replace(/^\s*package\s+[\w.]+;/m,'package '+pkg+';');
+    else uc='package '+pkg+';\n\n'+uc;
+    files.push({path:'app/src/main/java/'+jp+'/'+ji.name+'.java',data:enc.encode(uc)});
+    var MJ2='package '+pkg+';\n\nimport android.app.Activity;\nimport android.graphics.Typeface;\nimport android.os.Bundle;\nimport android.view.View;\nimport android.widget.ScrollView;\nimport android.widget.TextView;\nimport java.io.OutputStream;\nimport java.io.PrintStream;\nimport java.lang.reflect.Method;\n\npublic class MainActivity extends Activity {\n    private TextView tv;\n    private ScrollView sc;\n    protected void onCreate(Bundle s) {\n        super.onCreate(s);\n        sc = new ScrollView(this);\n        tv = new TextView(this);\n        tv.setPadding(48, 48, 48, 48);\n        tv.setTextSize(14);\n        tv.setTextColor(0xFFD9E8DF);\n        tv.setBackgroundColor(0xFF0B1210);\n        tv.setTypeface(Typeface.MONOSPACE);\n        sc.addView(tv);\n        setContentView(sc);\n        append("\\u25B6 App chal raha hai\\u2026\\n\\n");\n        PrintStream ps = new PrintStream(new OutputStream() {\n            public void write(int b) { append(String.valueOf((char) b)); }\n        }, true);\n        System.setOut(ps);\n        System.setErr(ps);\n        new Thread(new Runnable() {\n            public void run() {\n                try {\n                    Class<?> c = Class.forName("'+pkg+'.'+ji.name+'");\n                    Method m = c.getMethod("main", String[].class);\n                    m.invoke(null, (Object) new String[]{});\n                    append("\\n\\n\\u2705 Program complete.");\n                } catch (final Throwable t) {\n                    append("\\n\\u274C " + t);\n                }\n            }\n        }).start();\n    }\n    void append(final String x) {\n        runOnUiThread(new Runnable() {\n            public void run() {\n                tv.append(x);\n                sc.post(new Runnable() { public void run() { sc.fullScroll(View.FOCUS_DOWN); } });\n            }\n        });\n    }\n}\n';
+    files.push({path:'app/src/main/java/'+jp+'/MainActivity.java',data:enc.encode(MJ2)});
+  } else {
+    var page=code;
+    if(cur==='python'){
+      page='<!DOCTYPE html>\n<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">\n<style>body{background:#0b1210;color:#d9e8df;font-family:monospace;padding:16px;white-space:pre-wrap;font-size:14px;line-height:1.6}#e{color:#ff9d9d}</style>\n</head><body><div id="o">🐍 Python load ho raha hai…</div><div id="e"></div>\n<script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"><\/script>\n<script>\nvar CODE='+JSON.stringify(code)+';\nfunction ap(t){document.getElementById(\'o\').textContent+=t+"\\n";window.scrollTo(0,9e9)}\nfunction ae(t){document.getElementById(\'e\').textContent+=t+"\\n"}\nloadPyodide({indexURL:\'https://cdn.jsdelivr.net/pyodide/v0.26.4/full/\'}).then(function(py){\n py.setStdout({batched:ap});py.setStderr({batched:ae});\n return py.runPythonAsync(CODE).then(function(){ap("\\n✅ Program complete.")});\n}).catch(function(e){ae("❌ "+e.message)});\n<\/script></body></html>';
+    }
+    files.push({path:'app/src/main/java/'+jp+'/MainActivity.java',data:enc.encode(MJ)});
+    files.push({path:'app/src/main/assets/index.html',data:enc.encode(page)});
+  }
+  files.push({path:'.github/workflows/build-apk.yml',data:enc.encode(WF)});
+  return files;
+}
+
+var buildSeq=0,lastApk=null,elapsedTimer=null;
+function openOverlay(t){$('overlay').classList.remove('hidden');$('oDone').classList.add('hidden');$('oErr').classList.add('hidden');$('oTitle').textContent=t;$('oFill').style.width='0%'}
+function closeOverlay(){buildSeq++;clearInterval(elapsedTimer);$('overlay').classList.add('hidden')}
+$('oCloseBtn').onclick=closeOverlay;$('oClose2').onclick=closeOverlay;
+$('oRedl').onclick=function(){if(lastApk)dlBlob(lastApk.blob,lastApk.name)};
+function dlBlob(b,n){var u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=n;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);a.remove()},5000)}
+function renderSteps(list){$('oSteps').innerHTML=list.map(function(s){return '<li><span class="ost"></span><span>'+s+'</span></li>'}).join('')}
+function stRun(i){var l=$('oSteps').children[i];if(l)l.classList.add('run')}
+function stDone(i){var l=$('oSteps').children[i];if(l){l.classList.remove('run');l.classList.add('done')}}
+function stText(i,t){var l=$('oSteps').children[i];if(l)l.lastElementChild.textContent=t}
+function setFill(p){$('oFill').style.width=p+'%'}
+
+/* v2.2 — simple & solid Contents API upload */
+function putFile(path,data){
+  var ep=path.split('/').map(encodeURIComponent).join('/');
+  var body={message:'APKshala update',content:u8b64(data)};
+  return gh('/repos/'+GH.user+'/'+REPO+'/contents/'+ep,{method:'PUT',body:JSON.stringify(body)}).catch(function(e){
+    if(/422|409/.test(String(e.message))){
+      return gh('/repos/'+GH.user+'/'+REPO+'/contents/'+ep).then(function(ex){
+        body.sha=ex.sha;
+        return gh('/repos/'+GH.user+'/'+REPO+'/contents/'+ep,{method:'PUT',body:JSON.stringify(body)});
+      });
+    }
+    throw e;
+  });
+}
+
+$('btnApk').onclick=function(){
+  if(!ta.value.trim()){toast('Pehle code likho ya SAMPLE load karo');return}
+  if(!LANGS[cur].apk){toast('APK abhi WEB / PYTHON / JAVA ke liye hai');return}
+  if(!GH.token){$('ghSheet').classList.remove('hidden');toast('Pehle GitHub jodo (1 minute)');return}
+  pipeline();
+};
+function pipeline(){
+  var id=++buildSeq;
+  openOverlay('☁️ GitHub cloud par APK ban rahi hai…');
+  renderSteps(['GitHub connect','Repo ready ho rahi hai','Files upload ho rahi hain','Build trigger','APK compile ho rahi hai (1-3 min)','APK phone me aa rahi hai']);
+  var files=androidFiles(),runId=null,lastSha=null;
+  stRun(0);
+  gh('/user').then(function(j){
+    if(id!==buildSeq)return;GH.user=j.login;stDone(0);stRun(1);setFill(8);
+    return gh('/repos/'+GH.user+'/'+REPO).catch(function(){return null}).then(function(rep){
+      if(rep)return rep;
+      return gh('/user/repos',{method:'POST',body:JSON.stringify({name:REPO,public:true,auto_init:true})});
+    });
+  }).then(function(){
+    if(id!==buildSeq)return;stDone(1);stRun(2);
+    var chain=Promise.resolve();
+    files.forEach(function(f,idx){
+      chain=chain.then(function(){
+        if(id!==buildSeq)throw new Error('cancel');
+        stText(2,'Files upload… '+(idx+1)+'/'+files.length+'  ('+f.path.split('/').pop()+')');
+        setFill(12+idx*(38/files.length));
+        return putFile(f.path,f.data).then(function(res){lastSha=res.commit.sha});
+      });
+    });
+    return chain;
+  }).then(function(){
+    if(id!==buildSeq)return;stDone(2);stDone(3);stRun(4);setFill(55);
+    var t0=Date.now();
+    elapsedTimer=setInterval(function(){var s=Math.floor((Date.now()-t0)/1000);stText(4,'APK compile ho rahi hai… '+('0'+Math.floor(s/60)).slice(-2)+':'+('0'+s%60).slice(-2))},1000);
+    function poll(n){
+      if(id!==buildSeq)return Promise.reject(new Error('cancel'));
+      if(n>75)return Promise.reject(new Error('Timeout — github.com/'+GH.user+'/'+REPO+'/actions khud dekho'));
+      return gh('/repos/'+GH.user+'/'+REPO+'/actions/runs?per_page=5').then(function(runs){
+        var run=null;
+        runs.workflow_runs.forEach(function(w){if(!run&&w.head_sha===lastSha)run=w});
+        if(run&&run.status==='completed'){runId=run.id;return run}
+        return new Promise(function(res){setTimeout(res,8000)}).then(function(){return poll(n+1)});
+      });
+    }
+    return new Promise(function(res){setTimeout(res,6000)}).then(function(){return poll(0)});
+  }).then(function(run){
+    if(id!==buildSeq)return;clearInterval(elapsedTimer);
+    if(run.conclusion!=='success'){
+      stText(4,'❌ Build fail — code me error hai');
+      return fetchFailLogs(runId).then(function(logs){
+        $('oErr').textContent='❌ Build fail hui:\n\n'+(logs||'(logs nahi mile)')+'\n\nCode theek karke dobara try karo.';
+        $('oErr').classList.remove('hidden');
+      });
+    }
+    stDone(4);stRun(5);setFill(85);
+    return gh('/repos/'+GH.user+'/'+REPO+'/actions/runs/'+runId+'/artifacts').then(function(a){
+      if(!a.artifacts.length)throw new Error('Artifact nahi mila');
+      return fetch(a.artifacts[0].archive_download_url,{headers:authH()});
+    }).then(function(r){return r.arrayBuffer()}).then(unzip).then(function(entries){
+      var apk=null;
+      entries.forEach(function(e){if(/\.apk$/.test(e.name))apk=e});
+      if(!apk)throw new Error('APK zip me nahi mili');
+      return (apk.method===8?inflate(apk.data):Promise.resolve(apk.data)).then(function(data){
+        stDone(5);setFill(100);
+        var nm=slugify($('appName').value)+'.apk';
+        lastApk={blob:new Blob([data],{type:'application/vnd.android.package-archive'}),name:nm};
+        dlBlob(lastApk.blob,lastApk.name);
+        $('oFile').textContent=nm+' ('+Math.round(data.length/1048576*10)/10+' MB)';
+        $('oDone').classList.remove('hidden');
+      });
+    });
+  }).catch(function(e){
+    clearInterval(elapsedTimer);
+    if(e&&e.message==='cancel')return;
+    var msg=String(e&&e.message||e);
+    if(/workflow/i.test(msg))msg+='\n\n💡 Token me "workflow" scope chahiye: naya token banao (repo + workflow dono tick karke).';
+    $('oErr').textContent='❌ '+msg;
+    $('oErr').classList.remove('hidden');
+  });
+}
+function fetchFailLogs(runId){
+  return gh('/repos/'+GH.user+'/'+REPO+'/actions/runs/'+runId+'/jobs').then(function(j){
+    if(!j.jobs.length)return null;
+    return fetch(j.jobs[0].url+'/logs',{headers:authH()}).then(function(r){return r.arrayBuffer()}).then(function(buf){
+      var ents=unzip(buf),lines=[],chain=Promise.resolve();
+      ents.forEach(function(e){
+        chain=chain.then(function(){
+          return (e.method===8?inflate(e.data):Promise.resolve(e.data)).then(function(d){
+            new TextDecoder().decode(d).split('\n').forEach(function(l){
+              if(/error:|ERROR|Exception|Execution failed|FAILED/.test(l)&&lines.length<6)lines.push(l.trim());
+            });
+          });
+        });
+      });
+      return chain.then(function(){return lines.join('\n')||null});
+    });
+  }).catch(function(){return null});
+}
+
+(function(){
+  var saved=null;try{saved=JSON.parse(localStorage.getItem('apkshala2')||'{}')}catch(e){}
+  if(saved&&saved.code_web)ta.value=saved.code_web;else ta.value=SAMPLES.web;
+  updateGutter();runWeb();
+})();
+</script>
+</body>
+</html>
