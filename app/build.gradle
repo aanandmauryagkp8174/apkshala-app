@@ -1,4 +1,4 @@
 plugins { id 'com.android.application' }
 
-android { namespace 'com.apkshala.apkconverterpro'; compileSdk 34
- defaultConfig { applicationId 'com.apkshala.apkconverterpro'; minSdk 21; targetSdk 34; versionCode 100; versionName '1.0.0' } }
+android { namespace 'com.apkshala.billigame'; compileSdk 34
+ defaultConfig { applicationId 'com.apkshala.billigame'; minSdk 21; targetSdk 34; versionCode 100; versionName '1.0.0' } }
